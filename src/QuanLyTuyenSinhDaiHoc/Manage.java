@@ -1,13 +1,20 @@
 
 package QuanLyTuyenSinhDaiHoc;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Manage {
-    ArrayList<Person> person;
-    ArrayList<Student> dsTrungTuyenNganh;
-    ArrayList<Wish> nvTrungTuyen;
+    private ArrayList<Person> person;
+    private ArrayList<Student> dsTrungTuyenNganh;
+    private ArrayList<Wish> nvTrungTuyen;
     
     public Manage(){
         person = new ArrayList();
@@ -32,13 +39,13 @@ public class Manage {
     
     public void menuSuaDoi() {
         System.out.println("-----------Mời bạn lựa chọn-------------");
-        System.out.println("1.Sửa thông tin thí sinh");
-        System.out.println("2.Xóa thí sinh");
-        System.out.println("3.Sửa thông tin giám thị");
-        System.out.println("4.Xóa giám thị");
-        System.out.println("5.Sửa nguyện vọng");
-        System.out.println("6.Thêm nguyện vọng");
-        System.out.println("7.Xóa nguyện vọng");
+        System.out.println("| 1.Sửa thông tin thí sinh              |");
+        System.out.println("| 2.Xóa thí sinh                        |");
+        System.out.println("| 3.Sửa thông tin giám thị              |");
+        System.out.println("| 4.Xóa giám thị                        |");
+        System.out.println("| 5.Sửa nguyện vọng                     |");
+        System.out.println("| 6.Thêm nguyện vọng                    |");
+        System.out.println("| 7.Xóa nguyện vọng                     |");
         System.out.println("-----------Chọn số 0 đề thoát-----------");
     }
     
@@ -242,8 +249,49 @@ public class Manage {
         }
     }
     
+    
+    public void ghiFile(String fileName){
+        try{
+            FileOutputStream fileOut = new FileOutputStream(fileName);
+            ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
+            objOut.flush();
+            objOut.writeObject(person);
+            objOut.close();
+            fileOut.close();
+        } catch (Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
+    public void docFile(String fileName){
+        try{
+            person = new ArrayList<>();
+            FileInputStream fin = new FileInputStream(fileName);
+            ObjectInputStream fout = new ObjectInputStream(fin);
+            person = (ArrayList) fout.readObject();
+            hienDS();
+            fin.close();
+            fout.close();
+        } catch(FileNotFoundException e){
+            System.out.println("\nKhong thay file\n");
+        } catch(Exception ex){
+            ex.printStackTrace();
+        }
+    }
+    
     public void SapXepTheoDiem(){
-        
+        Collections.sort(nvTrungTuyen, new Comparator<Wish>(){
+            @Override
+            public int compare(Wish o1, Wish o2) {
+               if(o1.getDiemThi() > o2.getDiemThi()){
+                   return -1;
+               } else {
+                   return 1;
+               }
+            }  
+        });
+        System.out.println("Danh sách trúng tuyển sai khi sắp xếp");
+        hienDSTTNganh();
     }
     
     public void hienGiamThioHaNoi(){
@@ -254,16 +302,20 @@ public class Manage {
         }
     }
     
+    
+    
     public void menuChinh(){
-        System.out.println("------CHƯƠNG TRÌNH QUẢN LÍ TUYỂN SINH ĐẠI HỌC 2024------");
-        System.out.println("1. Nhập danh sách thí sinh và nguyện vọng của thí sinh");
-        System.out.println("2. Nhập danh sách giám thị coi thi");
-        System.out.println("3. Hiển thị danh sách các hỗ sơ dự thi");
-        System.out.println("4. Hiển thị danh sách các giám thị");
-        System.out.println("5. Chỉnh sửa thông tin (Thí Sinh, Nguyên Vọng,Giám Thị)");
-        System.out.println("6. Hiện ra danh sách trúng tuyền( input: mà ngành, điểm chuẩn)");
-        System.out.println("7. Sắp xếp danh sách trúng tuyển theo điểm thi giảm dần (chưa làm xong) ");
-        System.out.println("8. Thông kê các giám thị công tác ở Hà Nội");
-        System.out.println("-----.Nhắn phím 0 để thoát chương trình, xin cảm ơn!-----");
+        System.out.println("-------------CHƯƠNG TRÌNH QUẢN LÍ TUYỂN SINH ĐẠI HỌC 2024----------------");
+        System.out.println("| 1. Nhập danh sách thí sinh và nguyện vọng của thí sinh                 |");
+        System.out.println("| 2. Nhập danh sách giám thị coi thi                                     |");
+        System.out.println("| 3. Hiển thị danh sách các hỗ sơ dự thi                                 |");
+        System.out.println("| 4. Hiển thị danh sách các giám thị                                     |");
+        System.out.println("| 5. Chỉnh sửa thông tin (Thí Sinh, Nguyên Vọng,Giám Thị)                |");
+        System.out.println("| 6. Hiện ra danh sách trúng tuyền( input: mã ngành, điểm chuẩn)         |");
+        System.out.println("| 7. Lưu file đã nhập                                                    |");
+        System.out.println("| 8. Đọc dữ lệu từ file                                                  |");
+        System.out.println("| 9. Sắp xếp danh sách trúng tuyển theo điểm thi giảm dần                |");
+        System.out.println("| 10. Thông kê các giám thị công tác ở Hà Nội                            |");
+        System.out.println("-------------.Nhắn phím 0 để thoát chương trình, xin cảm ơn!-------------");
     }
 }

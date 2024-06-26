@@ -1,6 +1,7 @@
 
 package QuanLyTuyenSinhDaiHoc;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -18,12 +19,20 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    b = new Student();
-                    a.themDsNguoi(b);
+                    try{
+                        b = new Student();
+                        a.themDsNguoi(b);
+                    } catch(InputMismatchException ime){
+                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                    }
                     break;
                 case 2:
-                    b = new Supervisor();
-                    a.themDsNguoi(b);
+                    try{
+                        b = new Supervisor();
+                        a.themDsNguoi(b);
+                    }catch(InputMismatchException ime){
+                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                    }
                     break;
                 case 3:
                     a.hienDSHoSoThiSinh();
@@ -36,16 +45,29 @@ public class Main {
                     break;
                 case 6:
                     System.out.println("Nhập mã ngành: ");
-                    sc.nextLine();
                     String maNganh = sc.nextLine();
                     System.out.println("Nhập điểm chuẩn: ");
                     float diemChuan = sc.nextFloat();
                     a.hienDSTrungTuyen(maNganh, diemChuan);
                     break;
-                case 7: 
-                    // Implement sorting logic here
+                case 7:
+                    String tenFile;
+                    System.out.println("Nhập tên file muốn lưu:");
+                    sc.nextLine();
+                    tenFile = sc.nextLine();
+                    a.ghiFile(tenFile);
                     break;
-                case 8:
+                case 8: 
+                    String tenfile;
+                    System.out.println("Nhập tên file muốn đọc:");
+                    sc.nextLine();
+                    tenfile = sc.nextLine();
+                    a.docFile(tenfile);
+                    break;
+                case 9: 
+                    a.SapXepTheoDiem();
+                    break;
+                case 10:
                     a.hienGiamThioHaNoi();
                     break;
                 default:
