@@ -75,7 +75,7 @@ public class Student extends Person{
             nguyenVong.add(nguyenVongA);
         }
     }
-    
+     
     public void hienDsNguyenVong(){
         for(Wish x : nguyenVong){
             x.hienNguyenVong();

@@ -45,9 +45,9 @@ public class Person {
     
     public String getGioiTinh() {
         if(gioiTinh == 1){
-            return "NAM";
+            return "Nam";
         } else if(gioiTinh ==0){
-            return "NU";
+            return "Nu";
         } else {
             return null;
         }

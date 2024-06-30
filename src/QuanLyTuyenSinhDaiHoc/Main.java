@@ -51,16 +51,11 @@ public class Main {
                     a.hienDSTrungTuyen(maNganh, diemChuan);
                     break;
                 case 7:
-                    String tenFile;
-                    System.out.println("Nhập tên file muốn lưu:");
-                    sc.nextLine();
-                    tenFile = sc.nextLine();
-                    a.ghiFile(tenFile);
+                    a.ghiFile();
                     break;
                 case 8: 
                     String tenfile;
                     System.out.println("Nhập tên file muốn đọc:");
-                    sc.nextLine();
                     tenfile = sc.nextLine();
                     a.docFile(tenfile);
                     break;
@@ -71,6 +66,7 @@ public class Main {
                     a.hienGiamThioHaNoi();
                     break;
                 default:
+                    
                     break;
             }
         } while (choice != 0);

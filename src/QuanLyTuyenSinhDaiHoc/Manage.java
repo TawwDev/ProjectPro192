@@ -1,11 +1,7 @@
 
 package QuanLyTuyenSinhDaiHoc;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -33,8 +29,23 @@ public class Manage {
                 a = new Supervisor();
                 a.nhap();
             }
+            a.setHoTen(chuanHoa(a.getHoTen()));
+            a.setQueQuan(chuanHoa(a.getQueQuan()));
             person.add(a);
         }
+    }
+    
+    public String chuanHoa(String s){
+        String newName = "";
+        String []a = s.split("\\s+");
+        for(String x :a){
+            newName += Character.toUpperCase(x.charAt(0));
+            for(int j=1; j<x.length(); j++){
+                newName += Character.toLowerCase(x.charAt(j));
+            }
+            newName+= " ";
+        }
+        return newName.trim();
     }
     
     public void menuSuaDoi() {
@@ -122,74 +133,130 @@ public class Manage {
     }
     
     public void suaNguyenVong(int maNV, String sbd){
+//        boolean flag = true;
+//        boolean flag2 = true;
         for(Person x: person){
             if(((Student)x).getSBD().compareTo(sbd) ==0){
+//                flag2 = false;
                 for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
-                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV){
+                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
                         ((Student)x).getNguyenVong().get(i).nhapNguyenVong();
+//                        flag = false;
                     }
                 }
             }
         }
+//        if(flag2){
+//            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+//        }else {
+//            System.out.println("Sua thanh cong!");
+//        }
+//        if(flag){
+//            System.out.println("Khong tim thay ma nguyen vong, vui long kiem tra lai!");
+//        }else {
+//            System.out.println("Sua thanh cong");
+//        }
     }
     
     public void xoaNguyenVong(int maNV, String sbd){
+        boolean flag = true;
         for(Person x: person){
             if(((Student)x).getSBD().compareTo(sbd) ==0){
                 for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
-                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV){
+                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
                         ((Student)x).getNguyenVong().remove(i);
+                        flag = false;
                     }
                 }
             }
+        }
+        if(flag){
+            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
+        }else {
+            System.out.println("Xoa thanh cong");
         }
     }
     
     public void themNguyenVong(String sbd){
+        boolean flag = true;
         for(Person x: person){
             if(x instanceof Student){
                 ((Student)x).nhapDsNguyenVong();
+                flag = false;
             }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Them nguyen vong thanh cong!");
         }
     }
     
     public void suaThiSinh(String sbd){
+        boolean flag= true;
         for(Person x: person){
             if(x instanceof Student){
                 if(((Student)x).getSBD().compareTo(sbd)==0){
                    x.nhap();
+                   flag = false;
                 }
             }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua thi sinh thanh cong!");
         }
     }
     
     public void xoaThiSinh(String sbd){
+        boolean flag= true;
         for(Person x: person){
             if(x instanceof Student){
                 if(((Student)x).getSBD().compareTo(sbd)==0){
                    person.remove(x);
+                   flag = false;
                 }
             }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Xoa thi sinh thanh cong!");
         }
     }
     
     public void suaGiamThi(String maGT){
+        boolean flag= true;
         for(Person x: person){
             if(x instanceof Supervisor){
                 if(((Supervisor)x).getMaGt().compareTo(maGT)==0){
                    x.nhap();
+                   flag = false;
                 }
             }
+        }
+        if(flag){
+            System.out.println("Khong tim thay ma giam thi, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua giam thi thanh cong!");
         }
     }
     
     public void xoaGiamThi(String maGT){
+        boolean flag= true;
         for(Person x: person){
             if(x instanceof Supervisor){
                 if(((Supervisor)x).getMaGt().compareTo(maGT)==0){
                    person.remove(x);
+                   flag = false;
                 }
             }
+        }
+        if(flag){
+            System.out.println("Khong tim thay ma giam thi, vui long kiem tra lai!");
+        } else{
+            System.out.println("Xoa giam thi thanh cong!");
         }
     }
     
@@ -249,33 +316,97 @@ public class Manage {
         }
     }
     
-    
-    public void ghiFile(String fileName){
-        try{
-            FileOutputStream fileOut = new FileOutputStream(fileName);
-            ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-            objOut.flush();
-            objOut.writeObject(person);
-            objOut.close();
-            fileOut.close();
-        } catch (Exception ex){
-            ex.printStackTrace();
-        }
+    public void menuFile(){
+        System.out.println("-------------------------------");
+        System.out.println("|  1. ghi thi sinh vao file.  |");
+        System.out.println("|  2. ghi giam thi vao file.  |");
+        System.out.println("--------Chon 0 de thoat!-------");
     }
     
+    public void ghiFile(){
+        Scanner sc = new Scanner (System.in);
+        int n;
+        do{
+            menuFile();
+            System.out.print("Chọn: ");
+            n = Integer.parseInt(sc.nextLine());
+            
+            switch(n){
+                case 0:
+                    System.out.println("Da thoat!");
+                    break;
+                case 1:   
+                    ghiFileStudent();
+                    break;
+                case 2:
+                    ghiFileSupervisor();
+                    break;
+                default:
+                    System.out.println("Lua chon khong hop le vui long nhap lai!!");
+                    break;
+            }
+        } while(n!=0);
+    }
+    
+    public void ghiFileStudent(){
+        int index = 1;
+        try {
+            FileWriter fw = new FileWriter("thisinh.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (Person p : person) {
+                if (p instanceof Student) {
+                    Student s = (Student) p;
+                    bw.write(index +". Student," + "Ho ten: " + s.getHoTen() + ",Que quan: " + s.getQueQuan() + ",Nam sinh: " +
+                            s.getNamSinh() + ",Gioi Tinh: " + s.getGioiTinh() + ",Sbd: " + s.getSBD() + ", Diem uu tien: " + s.getDiemUuTien());
+                    for (Wish w : s.getNguyenVong()) {
+                        bw.write(",Ma nguyen vong: " + w.getMaNv() + ",Ma truong: " + w.getMaTruong() + ",Ma nganh: " + w.getMaNganh() + ",Ten nganh: " + w.getTenNganh() + ",Khoi xet tuyen: " + w.getKhoiXt() + ",Diem thi: " + w.getDiemThi());
+                    }
+                    index++;
+                    bw.newLine();
+                } 
+            }
+            bw.close();
+            fw.close();
+            System.out.println("Ghi file thisinh.txt thành công.");
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi file: " + e.getMessage());
+        }
+    }
+    public void ghiFileSupervisor(){
+        int index = 1;
+        try {
+            FileWriter fw = new FileWriter("giamthi.txt");
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (Person p : person) {
+                if (p instanceof Supervisor) {
+                    Supervisor s = (Supervisor) p;
+                    bw.write(index+ ". Supervisor," + s.getHoTen() + "," + s.getQueQuan() + "," +
+                            s.getNamSinh() + "," + s.getGioiTinh() + "," + s.getMaGt() + "," + s.getDonViCT());
+                    index++;
+                    bw.newLine();
+                }
+            }
+            bw.close();
+            fw.close();
+            System.out.println("Ghi file giamthi.txt thành công.");
+        } catch (IOException e) {
+            System.out.println("Lỗi khi ghi file: " + e.getMessage());
+        }
+    }
     public void docFile(String fileName){
-        try{
-            person = new ArrayList<>();
-            FileInputStream fin = new FileInputStream(fileName);
-            ObjectInputStream fout = new ObjectInputStream(fin);
-            person = (ArrayList) fout.readObject();
-            hienDS();
-            fin.close();
-            fout.close();
-        } catch(FileNotFoundException e){
-            System.out.println("\nKhong thay file\n");
-        } catch(Exception ex){
-            ex.printStackTrace();
+        try {
+            FileReader fr = new FileReader(fileName);
+            BufferedReader br = new BufferedReader(fr);
+            String line;
+            while ((line = br.readLine()) != null) {
+                // Xử lý dữ liệu đọc được từ file
+                System.out.println(line);
+            }
+            System.out.println("Đọc file thành công.");
+            br.close();
+            fr.close();
+        } catch (IOException e) {
+            System.out.println("Lỗi khi đọc file: " + e.getMessage());
         }
     }
     
