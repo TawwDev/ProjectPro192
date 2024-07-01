@@ -3,7 +3,7 @@ package QuanLyTuyenSinhDaiHoc;
 
 import java.util.Scanner;
 
-public class Wish {
+public class Wish{
     private String maNganh, maTruong, tenNganh, khoiXt;
     private float diemThi;
     private int maNv;
@@ -83,8 +83,10 @@ public class Wish {
         this.diemThi = sc.nextFloat();
     }
     
+    
     public void hienNguyenVong(){
         System.out.println("Mã trường: " + getMaTruong() + ", mã ngành: "+ getMaNganh()+", tên ngành: " + getTenNganh() + "\nKhối xét tuyển: "+getKhoiXt()+", điểm xét tuyển: "+ getDiemThi());
     }
     
+
 }

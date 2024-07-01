@@ -5,6 +5,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.ConcurrentModificationException;
+import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class Manage {
@@ -70,60 +73,93 @@ public class Manage {
             
             switch(n){
                 case 1:{
-                    String sbd;
-                    System.out.println("Nhập SBD của thí sinh cần sửa: ");
-                    sc.nextLine();
-                    sbd = sc.nextLine();
-                    suaThiSinh(sbd);
+                    try {
+                        String sbd;
+                        System.out.println("Nhập SBD của thí sinh cần sửa: ");
+                        sc.nextLine();
+                        sbd = sc.nextLine();
+                        suaThiSinh(sbd);
+                    } catch(InputMismatchException ime){
+                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                    }
                     break;
                 }
                 case 2:{
-                    String sbd;
-                    System.out.println("Nhập SBD của thí sinh cần xóa: ");
-                    sc.nextLine();
-                    sbd = sc.nextLine();
-                    xoaThiSinh(sbd);
+                    try{
+                        String sbd;
+                        System.out.println("Nhập SBD của thí sinh cần xóa: ");
+                        sc.nextLine();
+                        sbd = sc.nextLine();
+                        xoaThiSinh(sbd);
+                    } catch(InputMismatchException ime){
+                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                    } catch(ConcurrentModificationException cme){
+                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                    }
+                    
                     break;
                 }
                 case 3:{
-                    String maGT;
-                    System.out.println("Nhập mã giám thị cần sửa thông tin: ");
-                    sc.nextLine();
-                    maGT = sc.nextLine();
-                    suaGiamThi(maGT);
+                    try{
+                        String maGT;
+                        System.out.println("Nhập mã giám thị cần sửa thông tin: ");
+                        sc.nextLine();
+                        maGT = sc.nextLine();
+                        suaGiamThi(maGT);
+                    } catch(InputMismatchException ime){
+                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                    }
                     break;
                 }
                 case 4:{
-                    String maGT;
-                    System.out.println("Nhập mã giám thị cần xóa thông tin: ");
-                    sc.nextLine();
-                    maGT = sc.nextLine();
-                    xoaGiamThi(maGT);
+                    try{
+                        String maGT;
+                        System.out.println("Nhập mã giám thị cần xóa thông tin: ");
+                        sc.nextLine();
+                        maGT = sc.nextLine();
+                        xoaGiamThi(maGT);
+                    }catch(InputMismatchException ime){
+                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                    }
+                    
                     break;
                 }
                 case 5:{
-                    System.out.println("Nhập SBD của thí sinh: ");
-                    sc.nextLine();
-                    String sbd = sc.nextLine();
-                    System.out.println("Nhập mã nguyện vọng: ");
-                    int maNv = sc.nextInt();
-                    suaNguyenVong(maNv,sbd);
+                    try{
+                        System.out.println("Nhập SBD của thí sinh: ");
+                        sc.nextLine();
+                        String sbd = sc.nextLine();
+                        System.out.println("Nhập mã nguyện vọng: ");
+                        int maNv = sc.nextInt();
+                        suaNguyenVong(maNv,sbd); 
+                    }catch(InputMismatchException ime){
+                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                    }
                     break;   
                 }
                 case 6:{
-                    System.out.println("Nhập SBD của thí sinh: ");
-                    sc.nextLine();
-                    String sbd = sc.nextLine();
-                    themNguyenVong(sbd);
+                    try{
+                        System.out.println("Nhập SBD của thí sinh: ");
+                        sc.nextLine();
+                        String sbd = sc.nextLine();
+                        themNguyenVong(sbd);
+                    }catch(InputMismatchException ime){
+                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                    }
+                    
                     break;   
                 }
                 case 7:{
-                    System.out.println("Nhập SBD của thí sinh: ");
-                    sc.nextLine();
-                    String sbd = sc.nextLine();
-                    System.out.println("Nhập mã nguyện vọng: ");
-                    int maNv = sc.nextInt();
-                    xoaNguyenVong(maNv,sbd);
+                    try{
+                        System.out.println("Nhập SBD của thí sinh: ");
+                        sc.nextLine();
+                        String sbd = sc.nextLine();
+                        System.out.println("Nhập mã nguyện vọng: ");
+                        int maNv = sc.nextInt();
+                        xoaNguyenVong(maNv,sbd);
+                    }catch(InputMismatchException ime){
+                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                    }
                     break;   
                 }
                 default : 
@@ -133,35 +169,31 @@ public class Manage {
     }
     
     public void suaNguyenVong(int maNV, String sbd){
-//        boolean flag = true;
-//        boolean flag2 = true;
+        boolean flag = true;
         for(Person x: person){
-            if(((Student)x).getSBD().compareTo(sbd) ==0){
-//                flag2 = false;
+            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
                 for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
                     if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
                         ((Student)x).getNguyenVong().get(i).nhapNguyenVong();
-//                        flag = false;
+                        flag = false;
                     }
                 }
             }
         }
-//        if(flag2){
-//            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
-//        }else {
-//            System.out.println("Sua thanh cong!");
-//        }
-//        if(flag){
-//            System.out.println("Khong tim thay ma nguyen vong, vui long kiem tra lai!");
-//        }else {
-//            System.out.println("Sua thanh cong");
-//        }
+        if(flag){
+            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
+        }else {
+            System.out.println("Xoa thanh cong");
+        }
     }
+    
+    
+    
     
     public void xoaNguyenVong(int maNV, String sbd){
         boolean flag = true;
         for(Person x: person){
-            if(((Student)x).getSBD().compareTo(sbd) ==0){
+            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
                 for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
                     if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
                         ((Student)x).getNguyenVong().remove(i);
@@ -181,8 +213,10 @@ public class Manage {
         boolean flag = true;
         for(Person x: person){
             if(x instanceof Student){
-                ((Student)x).nhapDsNguyenVong();
-                flag = false;
+                if(((Student) x).getSBD().compareToIgnoreCase(sbd)==0){
+                   ((Student)x).nhapDsNguyenVong();
+                    flag = false; 
+                }               
             }
         }
         if(flag){
@@ -196,7 +230,7 @@ public class Manage {
         boolean flag= true;
         for(Person x: person){
             if(x instanceof Student){
-                if(((Student)x).getSBD().compareTo(sbd)==0){
+                if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
                    x.nhap();
                    flag = false;
                 }
@@ -210,15 +244,17 @@ public class Manage {
     }
     
     public void xoaThiSinh(String sbd){
+        List<Person> toRemove = new ArrayList<>();
         boolean flag= true;
         for(Person x: person){
             if(x instanceof Student){
-                if(((Student)x).getSBD().compareTo(sbd)==0){
-                   person.remove(x);
+                if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
+                   toRemove.add(x);
                    flag = false;
                 }
             }
         }
+        person.removeAll(toRemove);
         if(flag){
             System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
         } else{
@@ -230,7 +266,7 @@ public class Manage {
         boolean flag= true;
         for(Person x: person){
             if(x instanceof Supervisor){
-                if(((Supervisor)x).getMaGt().compareTo(maGT)==0){
+                if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGT)==0){
                    x.nhap();
                    flag = false;
                 }
@@ -244,15 +280,17 @@ public class Manage {
     }
     
     public void xoaGiamThi(String maGT){
+        List<Person> toRemove = new ArrayList<>();
         boolean flag= true;
         for(Person x: person){
             if(x instanceof Supervisor){
-                if(((Supervisor)x).getMaGt().compareTo(maGT)==0){
-                   person.remove(x);
+                if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGT)==0){
+                   toRemove.add(x);
                    flag = false;
                 }
             }
         }
+        person.removeAll(toRemove);
         if(flag){
             System.out.println("Khong tim thay ma giam thi, vui long kiem tra lai!");
         } else{
@@ -262,8 +300,10 @@ public class Manage {
     
     public void hienDSGiamThi(){
         System.out.println("--------------------------");
+        int index=1;
         for(Person x : person){
             if(x instanceof Supervisor){
+                System.out.print(index++ + ". ");
                 x.hien();
             }
         }
@@ -278,14 +318,17 @@ public class Manage {
     
     public void hienDSHoSoThiSinh(){
         System.out.println("--------------------------");
+        int index =1;
         for(Person x : person){
             if(x instanceof Student){
+                System.out.print(index++ +". ");
                 ((Student)x).hien();
             }
         }
     }
     public void hienDSThiSinh(){
         System.out.println("--------------------------");
+        
         for(Person x : person){
             if(x instanceof Student){
                 x.hien();
@@ -296,10 +339,13 @@ public class Manage {
     public void hienDSTrungTuyen(String maNganh, float diemChuan){
         dsTrungTuyenNganh = new ArrayList<>();
         nvTrungTuyen = new ArrayList<>();
+        int index =1;
         for(Person x : person){
             if(x instanceof Student){
                 for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
-                    if(((Student)x).getNguyenVong().get(i).getMaNganh().compareTo(maNganh) == 0 && ((Student)x).getNguyenVong().get(i).getDiemThi() >= diemChuan){
+                    float tongDiem = ((Student)x).getNguyenVong().get(i).getDiemThi() +((Student) x).getDiemUuTien();
+                    if(((Student)x).getNguyenVong().get(i).getMaNganh().compareTo(maNganh) == 0 && tongDiem >= diemChuan){
+                        System.out.print(index++ + ". ");
                         ((Student)x).hienThongTinTs();
                         ((Student)x).getNguyenVong().get(i).hienNguyenVong();
                         dsTrungTuyenNganh.add((Student)x);
@@ -311,7 +357,9 @@ public class Manage {
     }
     
     public void hienDSTTNganh(){
+        int index =1;
         for(Wish x : nvTrungTuyen){
+            System.out.print(index++ +". ");
             x.hienNguyenVong();
         }
     }
@@ -411,23 +459,27 @@ public class Manage {
     }
     
     public void SapXepTheoDiem(){
+        Scanner sc = new Scanner (System.in);
         Collections.sort(nvTrungTuyen, new Comparator<Wish>(){
             @Override
             public int compare(Wish o1, Wish o2) {
                if(o1.getDiemThi() > o2.getDiemThi()){
                    return -1;
-               } else {
+               } else if(o1.getDiemThi() < o2.getDiemThi()){
                    return 1;
+               } else{
+                   return 0;
                }
             }  
         });
-        System.out.println("Danh sách trúng tuyển sai khi sắp xếp");
         hienDSTTNganh();
     }
     
     public void hienGiamThioHaNoi(){
+        int index =1;
         for(Person x : person){
             if(x instanceof Supervisor && ((Supervisor)x).getQueQuan().equalsIgnoreCase("Ha Noi")== true){
+                System.out.print(index++ + ". ");
                 x.hien();
             }
         }
@@ -444,7 +496,7 @@ public class Manage {
         System.out.println("| 5. Chỉnh sửa thông tin (Thí Sinh, Nguyên Vọng,Giám Thị)                |");
         System.out.println("| 6. Hiện ra danh sách trúng tuyền( input: mã ngành, điểm chuẩn)         |");
         System.out.println("| 7. Lưu file đã nhập                                                    |");
-        System.out.println("| 8. Đọc dữ lệu từ file                                                  |");
+        System.out.println("| 8. Đọc dữ lệu từ file (thisinh.txt or giamthi.txt)                     |");
         System.out.println("| 9. Sắp xếp danh sách trúng tuyển theo điểm thi giảm dần                |");
         System.out.println("| 10. Thông kê các giám thị công tác ở Hà Nội                            |");
         System.out.println("-------------.Nhắn phím 0 để thoát chương trình, xin cảm ơn!-------------");

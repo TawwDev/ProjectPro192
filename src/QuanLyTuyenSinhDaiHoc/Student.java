@@ -77,7 +77,9 @@ public class Student extends Person{
     }
      
     public void hienDsNguyenVong(){
+        int index =1;
         for(Wish x : nguyenVong){
+            System.out.print("Ma nguyen vong "+index++ +": ");
             x.hienNguyenVong();
         }
     }

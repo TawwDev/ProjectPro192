@@ -66,7 +66,7 @@ public class Main {
                     a.hienGiamThioHaNoi();
                     break;
                 default:
-                    
+                    System.out.println("Lua chon khong hop le vui long chon lai!");
                     break;
             }
         } while (choice != 0);

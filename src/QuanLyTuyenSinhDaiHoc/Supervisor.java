@@ -23,7 +23,7 @@ public class Supervisor extends Person{
     }
 
     public String getDonViCT() {
-        return donViCT;
+        return chuanHoa(this.donViCT);
     }
 
     public void setDonViCT(String donViCT) {
@@ -43,6 +43,19 @@ public class Supervisor extends Person{
     @Override
     public void hien(){
         super.hien();
-        System.out.println("\nMã giám thị: "+ getMaGt()+ ", đơn vị công tác: "+ getDonViCT()+"}");
+        System.out.print("Mã giám thị: "+ getMaGt()+ ", Đơn vị công tác: "+ getDonViCT()+"\n");
+    }
+    
+    public String chuanHoa(String s){
+        String newName = "";
+        String []a = s.split("\\s+");
+        for(String x :a){
+            newName += Character.toUpperCase(x.charAt(0));
+            for(int j=1; j<x.length(); j++){
+                newName += Character.toLowerCase(x.charAt(j));
+            }
+            newName+= " ";
+        }
+        return newName.trim();
     }
 }
