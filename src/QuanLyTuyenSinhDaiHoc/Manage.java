@@ -338,32 +338,74 @@ public class Manage {
         }
     }
     
-    public void xoaNguyenVong(int maNV, String sbd){
-        boolean flag = true;
-        for(Person x: person){
-            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
-                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
-                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
-                        ((Student)x).getNguyenVong().remove(i);
-                        flag = false;
-                    }
-                }
+//    public void xoaNguyenVong(int maNV, String sbd){
+//        maNV -=1;
+//        boolean flag = true;
+//        for(Person x: person){
+//            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
+//                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
+//                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV){
+//                        ((Student)x).getNguyenVong().remove(i);
+//                        flag = false;
+//                    }
+//                }
+//            }
+//        }
+//        if(flag){
+//            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
+//        }else {
+//            System.out.println("Xoa thanh cong");
+//        }
+//    }
+    public void xoaNguyenVong(int maNV, String sbd) {
+    if (maNV < 1) {
+        System.out.println("Mã nguyện vọng không hợp lệ!");
+        return;
+    }
+    maNV -= 1;
+
+    boolean foundSbd = false;
+    boolean deleted = false;
+
+    for (Person x : person) {
+        if (x instanceof Student && ((Student) x).getSBD().equalsIgnoreCase(sbd)) {
+            foundSbd = true;
+            ArrayList<Wish> nguyenVongList = ((Student) x).getNguyenVong();
+
+            if (maNV < nguyenVongList.size() && maNV >= 0) {
+                Wish wishToRemove = nguyenVongList.get(maNV);
+                
+                nguyenVongList.remove(wishToRemove);
+                deleted = true;
+                System.out.println("Xóa thành công nguyện vọng có mã: " + (maNV + 1));
+                break;
+            } else {
+                System.out.println("Mã nguyện vọng không hợp lệ!");
+                return;
             }
         }
-        if(flag){
-            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
-        }else {
-            System.out.println("Xoa thanh cong");
-        }
     }
-    
+
+    if (!foundSbd) {
+        System.out.println("Không tìm thấy SBD, vui lòng kiểm tra lại!");
+    } else if (!deleted) {
+        System.out.println("Xóa không thành công, nguyện vọng không tồn tại!");
+    }
+}
     //can sua
     public void themNguyenVong(String sbd){
         boolean flag = true;
         for(Person x: person){
             if(x instanceof Student){
                 if(((Student) x).getSBD().compareToIgnoreCase(sbd)==0){
-                   ((Student)x).nhapDsNguyenVong();
+                    Scanner sc = new Scanner(System.in);
+                    System.out.print("Nhập số nguyện vọng vần thêm: ");
+                    int n = sc.nextInt();
+                    for (int i = 0; i < n; i++) {
+                        Wish nguyenVongA = new Wish();
+                        nguyenVongA.nhapNguyenVong();
+                        ((Student) x).getNguyenVong().add(nguyenVongA);
+                    }
                     flag = false; 
                 }               
             }

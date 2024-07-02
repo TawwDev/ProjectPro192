@@ -1,2 +1,1 @@
-1. Student,Ho ten: Nguyen Minh Tam,Que quan: Yen Bau,Nam sinh: 2004,Gioi Tinh: Nam,Sbd: he123, Diem uu tien: 0.25,Ma nguyen vong: 0,Ma truong: fpt,Ma nganh: 01,Ten nganh: cntt,Khoi xet tuyen: a01,Diem thi: 25.0
-2. Student,Ho ten: Nguyen Van B,Que quan: Ha Noi,Nam sinh: 2003,Gioi Tinh: Nam,Sbd: he1234, Diem uu tien: 0.25,Ma nguyen vong: 0,Ma truong: fpt,Ma nganh: 01,Ten nganh: cntt,Khoi xet tuyen: a01,Diem thi: 25.0
+1. Student,Ho ten: Nguyen Minh Tam,Que quan: Yen Bai,Nam sinh: 2004,Gioi Tinh: Nam,Sbd: he123, Diem uu tien: 0.25
