@@ -34,16 +34,16 @@ public class Supervisor extends Person{
     public void nhap(){
         super.nhap();
         Scanner sc = new Scanner (System.in);
-        System.out.print("Mã giám thị: ");
+        System.out.print("Ma giam thi: ");
         maGt = sc.nextLine();
-        System.out.print("Đơn vị công tác: ");
+        System.out.print("Don vi cong tac: ");
         donViCT = sc.nextLine();
     }
     
     @Override
     public void hien(){
         super.hien();
-        System.out.print("Mã giám thị: "+ getMaGt()+ ", Đơn vị công tác: "+ getDonViCT()+"\n");
+        System.out.print("Ma giam thi: "+ getMaGt()+ ", Don vi cong tac: "+ getDonViCT()+"\n");
     }
     
     public String chuanHoa(String s){

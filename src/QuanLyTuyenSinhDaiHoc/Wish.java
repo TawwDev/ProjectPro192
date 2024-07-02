@@ -70,22 +70,22 @@ public class Wish{
     
     public void nhapNguyenVong(){
         Scanner sc = new Scanner (System.in);
-        System.out.println("Mã nguyện vọng: từ 1 tăng dần: ");
-        System.out.print("Mã trường: ");
+        System.out.println("Ma nguyen vong: tu 1 tang dan: ");
+        System.out.print("Ma truong: ");
         this.maTruong = sc.nextLine();
-        System.out.print("Mã ngành: ");
+        System.out.print("Ma nganh: ");
         this.maNganh = sc.nextLine();
-        System.out.print("Tên ngành: ");
+        System.out.print("Ten nganh: ");
         this.tenNganh = sc.nextLine();
-        System.out.print("Khối xét tuyển: ");
+        System.out.print("Khoi xet tuyen: ");
         this.khoiXt = sc.nextLine();
-        System.out.print("Điểm thi: ");
+        System.out.print("Diem thi: ");
         this.diemThi = sc.nextFloat();
     }
     
     
     public void hienNguyenVong(){
-        System.out.println("Mã trường: " + getMaTruong() + ", mã ngành: "+ getMaNganh()+", tên ngành: " + getTenNganh() + "\nKhối xét tuyển: "+getKhoiXt()+", điểm xét tuyển: "+ getDiemThi());
+        System.out.println("Ma truong: " + getMaTruong() + ", ma nganh: "+ getMaNganh()+", ten nganh: " + getTenNganh() + "\nKhoi xet tuyen: "+getKhoiXt()+", diem xet tuyen: "+ getDiemThi());
     }
     
 

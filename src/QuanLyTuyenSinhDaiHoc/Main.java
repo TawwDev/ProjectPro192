@@ -13,17 +13,20 @@ public class Main {
     
     do {
             a.menuChinh();
-            System.out.print("Lưa chọn: ");
+            System.out.print("Lua chon: ");
             choice = sc.nextInt();
             sc.nextLine(); 
 
             switch (choice) {
+                case 0:
+                    System.out.println("Da thoat chuong trinh!");
+                    break;
                 case 1:
                     try{
                         b = new Student();
                         a.themDsNguoi(b);
                     } catch(InputMismatchException ime){
-                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                        System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
                     }
                     break;
                 case 2:
@@ -31,7 +34,7 @@ public class Main {
                         b = new Supervisor();
                         a.themDsNguoi(b);
                     }catch(InputMismatchException ime){
-                        System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
+                        System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
                     }
                     break;
                 case 3:
@@ -48,18 +51,22 @@ public class Main {
                     break;
                 case 7: 
                     String tenfile;
-                    System.out.println("Nhập tên file muốn đọc:");
+                    System.out.println("Nhap ten file muon doc:");
                     tenfile = sc.nextLine();
                     a.docFile(tenfile);
                     break;
                 case 8:
-                    System.out.println("Nhập mã ngành: ");
+                    System.out.println("Nhap ma nganh: ");
                     String maNganh = sc.nextLine();
-                    System.out.println("Nhập điểm chuẩn: ");
+                    System.out.println("Nhap diem chuan: ");
                     float diemChuan = sc.nextFloat();
-                    a.hienDSTrungTuyen(maNganh, diemChuan);
-                    break;
-                
+                    if(diemChuan <0 || diemChuan >30){
+                        System.out.println("Diem chuan (0-30), Diem nhap khong hop le vui long nhap lai!");
+                        break;
+                    } else {
+                        a.hienDSTrungTuyen(maNganh, diemChuan);
+                        break;
+                    }
                 case 9: 
                     a.SapXepTheoDiem();
                     break;
@@ -67,7 +74,7 @@ public class Main {
                     a.hienGiamThioHaNoi();
                     break;
                 default:
-                    System.out.println("Lua chon khong hop le vui long chon lai!");
+                    System.out.println("Lua chon khong hop le, vui long chon lai!");
                     break;
             }
         } while (choice != 0);

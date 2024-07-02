@@ -58,7 +58,7 @@ public class Student extends Person{
         super.nhap();
         System.out.print("SBD: ");
         SBD = sc.nextLine();
-        System.out.print("Điểm ưu tiên: ");
+        System.out.print("Diem uu tien: ");
         diemUuTien = sc.nextFloat();
         setDiemUuTien(diemUuTien);
         nhapDsNguyenVong();
@@ -66,7 +66,7 @@ public class Student extends Person{
     
     public void nhapDsNguyenVong(){
         Scanner sc = new Scanner(System.in);
-        System.out.print("Nhập số nguyện vọng vần thêm: ");
+        System.out.print("Nhap so nguyen vong can them: ");
         int n = sc.nextInt();
         nguyenVong = new ArrayList<>();
         for(int i=0; i<n; i++){
@@ -87,12 +87,12 @@ public class Student extends Person{
     @Override 
     public void hien(){
         super.hien();
-        System.out.println("SBD: " + getSBD() + ", điểm ưu tiên: "+ getDiemUuTien());
+        System.out.println("SBD: " + getSBD() + ", diem uu tien: "+ getDiemUuTien());
         hienDsNguyenVong();
     }
     
     public void hienThongTinTs(){
         super.hien();
-        System.out.println("SBD: " + getSBD() + ", điểm ưu tiên: "+ getDiemUuTien());
+        System.out.println("SBD: " + getSBD() + ", diem uu tien: "+ getDiemUuTien());
     }
 }

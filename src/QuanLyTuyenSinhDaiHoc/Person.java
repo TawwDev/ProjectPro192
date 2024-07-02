@@ -59,19 +59,19 @@ public class Person {
     
     public void nhap(){
         Scanner sc = new Scanner (System.in);
-        System.out.print("Họ Tên: ");
+        System.out.print("Ho Ten: ");
         this.hoTen = sc.nextLine();
-        System.out.print("Quê Quán: ");
+        System.out.print("Que Quan: ");
         this.queQuan = sc.nextLine();
-        System.out.print("Năm Sinh: ");
+        System.out.print("Nam Sinh: ");
         this.namSinh = sc.nextInt();
         do{
-            System.out.println("Giới tính(nam: 1/nữ: 0)");
+            System.out.println("Gioi tinh (nam: 1/nu: 0)");
             this.gioiTinh = sc.nextInt();
         } while(gioiTinh !=1 && gioiTinh!=0);
     }
     
     public void hien(){
-        System.out.print("Họ và tên: " + getHoTen() + ", giới tính: "+ getGioiTinh() + ", năm Sinh: " + getNamSinh()+", quê Quán: "+ getQueQuan() + "\n");
+        System.out.print("Ho va ten: " + getHoTen() + ", gioi tinh: "+ getGioiTinh() + ", nam sinh: " + getNamSinh()+", que quan: "+ getQueQuan() + "\n");
     }
 }
