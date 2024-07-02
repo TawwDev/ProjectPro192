@@ -44,21 +44,22 @@ public class Main {
                     a.SuaDoi();
                     break;
                 case 6:
+                    a.ghiFile();
+                    break;
+                case 7: 
+                    String tenfile;
+                    System.out.println("Nhập tên file muốn đọc:");
+                    tenfile = sc.nextLine();
+                    a.docFile(tenfile);
+                    break;
+                case 8:
                     System.out.println("Nhập mã ngành: ");
                     String maNganh = sc.nextLine();
                     System.out.println("Nhập điểm chuẩn: ");
                     float diemChuan = sc.nextFloat();
                     a.hienDSTrungTuyen(maNganh, diemChuan);
                     break;
-                case 7:
-                    a.ghiFile();
-                    break;
-                case 8: 
-                    String tenfile;
-                    System.out.println("Nhập tên file muốn đọc:");
-                    tenfile = sc.nextLine();
-                    a.docFile(tenfile);
-                    break;
+                
                 case 9: 
                     a.SapXepTheoDiem();
                     break;

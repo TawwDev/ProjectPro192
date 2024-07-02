@@ -75,7 +75,7 @@ public class Student extends Person{
             nguyenVong.add(nguyenVongA);
         }
     }
-     
+    
     public void hienDsNguyenVong(){
         int index =1;
         for(Wish x : nguyenVong){

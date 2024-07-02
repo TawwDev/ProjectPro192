@@ -78,7 +78,7 @@ public class Manage {
                         System.out.println("Nhập SBD của thí sinh cần sửa: ");
                         sc.nextLine();
                         sbd = sc.nextLine();
-                        suaThiSinh(sbd);
+                        suaTS(sbd);
                     } catch(InputMismatchException ime){
                         System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
                     }
@@ -105,7 +105,7 @@ public class Manage {
                         System.out.println("Nhập mã giám thị cần sửa thông tin: ");
                         sc.nextLine();
                         maGT = sc.nextLine();
-                        suaGiamThi(maGT);
+                        suaGt(maGT);
                     } catch(InputMismatchException ime){
                         System.out.println("Dữ liệu nhập không hợp lệ. Vui lòng thử lại.");
                     }
@@ -168,13 +168,80 @@ public class Manage {
         } while (n !=0);
     }
     
+//    public void suaNguyenVong(int maNV, String sbd){
+//        boolean flag = true;
+//        for(Person x: person){
+//            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
+//                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
+//                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
+//                        ((Student)x).getNguyenVong().get(i).nhapNguyenVong();
+//                        flag = false;
+//                    }
+//                }
+//            }
+//        }
+//        if(flag){
+//            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
+//        }else {
+//            System.out.println("Xoa thanh cong");
+//        }
+//    }
+    
+    public void menuSuaNguyenVong(){
+        System.out.println("------------Sua Nguyen Vong-------------");
+        System.out.println("1.Sua ma truong");
+        System.out.println("2.Sua ma nganh");
+        System.out.println("3.Sua ten nganh");
+        System.out.println("4.Sua khoi xet tuyen");
+        System.out.println("5.Sua diem thi");
+        System.out.println("-----------Chon 0 de thoat!-------------");
+    }
+    
     public void suaNguyenVong(int maNV, String sbd){
+        Scanner sc = new Scanner (System.in);
+        int n;
+        do{
+            menuSuaNguyenVong();
+            System.out.print("Lua chon: ");
+            n = Integer.parseInt(sc.nextLine());
+            switch(n){
+                case 0:
+                    System.out.println("Da thoat!");
+                    break;
+                case 1:
+                    suaMatruong(maNV, sbd);
+                    break;
+                case 2:
+                    suaMaNganh(maNV, sbd);
+                    break;
+                case 3:
+                    suaTenNganh(maNV, sbd);
+                    break;
+                case 4:
+                    suaKhoiXetTuyen(maNV, sbd);
+                    break;
+                case 5:
+                    suaDiemThi(maNV, sbd);
+                    break;
+                default:
+                    System.out.println("Lua chon khong hop le, vui long nhap lai!");
+                    break;
+            }
+        } while (n!=0);
+        
+    }
+    
+    
+    public void suaMatruong(int maNV, String sbd){
+        Scanner sc = new Scanner (System.in);
         boolean flag = true;
+        System.out.print("Nhap ma truong muon doi: ");
+        String maTruong = sc.nextLine();
         for(Person x: person){
             if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
                 for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
                     if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
-                        ((Student)x).getNguyenVong().get(i).nhapNguyenVong();
+                        ((Student)x).getNguyenVong().get(i).setMaTruong(maTruong);
                         flag = false;
                     }
                 }
@@ -183,12 +250,93 @@ public class Manage {
         if(flag){
             System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
         }else {
-            System.out.println("Xoa thanh cong");
+            System.out.println("Sua thanh cong!");
         }
     }
-    
-    
-    
+    public void suaMaNganh(int maNV, String sbd){
+        Scanner sc = new Scanner (System.in);
+        boolean flag = true;
+        System.out.print("Nhap ma nganh muon doi: ");
+        String maNganh = sc.nextLine();
+        for(Person x: person){
+            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
+                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
+                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
+                        ((Student)x).getNguyenVong().get(i).setMaNganh(maNganh);
+                        flag = false;
+                    }
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
+        }else {
+            System.out.println("Sua thanh cong!");
+        }
+    }
+    public void suaTenNganh(int maNV, String sbd){
+        Scanner sc = new Scanner (System.in);
+        boolean flag = true;
+        System.out.print("Nhap ten nganh muon doi: ");
+        String tenNganh = sc.nextLine();
+        for(Person x: person){
+            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
+                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
+                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
+                        ((Student)x).getNguyenVong().get(i).setTenNganh(tenNganh);
+                        flag = false;
+                    }
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
+        }else {
+            System.out.println("Sua thanh cong!");
+        }
+    }
+    public void suaKhoiXetTuyen(int maNV, String sbd){
+        Scanner sc = new Scanner (System.in);
+        boolean flag = true;
+        System.out.print("Nhap khoi xet tuyen muon doi: ");
+        String khoiXT = sc.nextLine();
+        for(Person x: person){
+            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
+                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
+                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
+                        ((Student)x).getNguyenVong().get(i).setKhoiXt(khoiXT);
+                        flag = false;
+                    }
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
+        }else {
+            System.out.println("Sua thanh cong!");
+        }
+    }
+    public void suaDiemThi(int maNV, String sbd){
+        Scanner sc = new Scanner (System.in);
+        boolean flag = true;
+        System.out.print("Nhap diem thi muon doi: ");
+        float diemThi = Float.parseFloat(sc.nextLine());
+        for(Person x: person){
+            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
+                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
+                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
+                        ((Student)x).getNguyenVong().get(i).setDiemThi(diemThi);
+                        flag = false;
+                    }
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
+        }else {
+            System.out.println("Sua thanh cong!");
+        }
+    }
     
     public void xoaNguyenVong(int maNV, String sbd){
         boolean flag = true;
@@ -209,6 +357,7 @@ public class Manage {
         }
     }
     
+    //can sua
     public void themNguyenVong(String sbd){
         boolean flag = true;
         for(Person x: person){
@@ -226,12 +375,60 @@ public class Manage {
         }
     }
     
-    public void suaThiSinh(String sbd){
-        boolean flag= true;
+    public void menuSuaThiSinh(){
+        System.out.println("----------Sua thong tin thi sinh---------");
+        System.out.println("1.Sua ten");
+        System.out.println("2.Sua que quan");
+        System.out.println("3.Sua nam sinh");
+        System.out.println("4.Sua gioi tinh");
+        System.out.println("5.Sua sbd");
+        System.out.println("6.Sua diem uu tien");
+        System.out.println("-----------Chon 0 de thoat!--------------");
+    }
+    public void suaTS(String sbd){
+        Scanner sc = new Scanner (System.in);
+        int n;
+        do{
+            menuSuaThiSinh();
+            System.out.print("Lua chon: ");
+            n = Integer.parseInt(sc.nextLine());
+            switch(n){
+                case 0:
+                    System.out.println("Da thoat!");
+                    break;
+                case 1: 
+                    suaTenThiSinh(sbd);
+                    break;
+                case 2:
+                    suaQQThiSinh(sbd);
+                    break;
+                case 3:
+                    suaNamSinhThiSinh(sbd);
+                    break;
+                case 4: 
+                    suaGioiTinhThiSinh(sbd);
+                    break;
+                case 5:
+                    suaSbdThiSinh(sbd);
+                    break;
+                case 6:
+                    suaDiemUuTienThiSinh(sbd);
+                    break;
+                default:
+                    System.out.println("Lua chon khong hop le, vui long chon lai!");
+                    break;
+            }
+        }while(n!=0);
+    }
+    public void suaTenThiSinh(String sbd){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Nhap ten muon doi: ");
+        String name = sc.nextLine();
         for(Person x: person){
             if(x instanceof Student){
                 if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
-                   x.nhap();
+                   x.setHoTen(name);
                    flag = false;
                 }
             }
@@ -239,7 +436,110 @@ public class Manage {
         if(flag){
             System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
         } else{
-            System.out.println("Sua thi sinh thanh cong!");
+            System.out.println("Sua ten thi sinh thanh cong!");
+        }
+    }
+    
+    public void suaQQThiSinh(String sbd){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Nhap que quan muon doi: ");
+        String name = sc.nextLine();
+        for(Person x: person){
+            if(x instanceof Student){
+                if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
+                   x.setQueQuan(name);
+                   flag = false;
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua que quan thi sinh thanh cong!");
+        }
+    }
+   
+    public void suaNamSinhThiSinh(String sbd){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Nhap nam sinh muon doi: ");
+        int birth = Integer.parseInt(sc.nextLine());
+        for(Person x: person){
+            if(x instanceof Student){
+                if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
+                   x.setNamSinh(birth);
+                   flag = false;
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua nam sinh thi sinh thanh cong!");
+        }
+    }
+    
+    public void suaSbdThiSinh(String sbd){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Nhap sbd muon doi: ");
+        String Sbd = sc.nextLine();
+        for(Person x: person){
+            if(x instanceof Student){
+                if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
+                   ((Student) x).setSBD(Sbd);
+                   flag = false;
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua sbd thi sinh thanh cong!");
+        }
+    }
+    
+    public void suaDiemUuTienThiSinh(String sbd){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Nhap sbd muon doi: ");
+        float diemUT = Float.parseFloat(sc.nextLine());
+        for(Person x: person){
+            if(x instanceof Student){
+                if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
+                   ((Student) x).setDiemUuTien(diemUT);
+                   flag = false;
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua diem uu tien thi sinh thanh cong!");
+        }
+    }
+    
+    public void suaGioiTinhThiSinh(String sbd){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        int gioiTinh;
+        do{
+            System.out.println("Giới tính(nam: 1/nữ: 0)");
+            gioiTinh = sc.nextInt();
+        } while(gioiTinh !=1 && gioiTinh!=0);
+        for(Person x: person){
+            if(x instanceof Student){
+                if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
+                   x.setGioiTinh(gioiTinh);
+                   flag = false;
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua gioi tinh thi sinh thanh cong!");
         }
     }
     
@@ -262,20 +562,168 @@ public class Manage {
         }
     }
     
-    public void suaGiamThi(String maGT){
-        boolean flag= true;
+    public void menuSuaGT(){
+        System.out.println("------------Sua thong tin giam thi-----------");
+        System.out.println("1.Sua ho ten giam thi");
+        System.out.println("2.Sua que quan giam thi");
+        System.out.println("3.Sua nam sinh giam thi");
+        System.out.println("4.Sua gioi tinh giam thi");
+        System.out.println("5.Sua ma giam thi");
+        System.out.println("6.Sua don vi cong tac");
+        System.out.println("--------------Chon 0 de thoat!----------------");
+    }
+    
+    public void suaGt(String maGt){
+        Scanner sc = new Scanner (System.in);
+        int n;
+        do{
+            menuSuaGT();
+            System.out.print("Lua Chon: ");
+            n = Integer.parseInt(sc.nextLine());
+            
+            switch(n){
+                case 0:
+                    System.out.println("Da thoat!");
+                    break;
+                case 1:
+                    suaTenGiamThi(maGt);
+                    break;
+                case 2:
+                    suaQQGiamThi(maGt);
+                    break;
+                case 3:
+                    suaNamSinhGiamThi(maGt);
+                    break;
+                case 4:
+                    suaGioiTinhGiamThi(maGt);
+                    break;
+                case 5:
+                    suaMaGT(maGt);
+                    break;
+                case 6:
+                    suaDonViCongTac(maGt);
+                    break;
+                default:
+                    System.out.println("Lua chon khong hop le, vui long nhap lai!");
+                    break;
+            }
+        } while (n!=0);
+    }
+    public void suaTenGiamThi(String maGt){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Nhap ten muon doi: ");
+        String name = sc.nextLine();
         for(Person x: person){
             if(x instanceof Supervisor){
-                if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGT)==0){
-                   x.nhap();
+                if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGt)==0){
+                   x.setHoTen(name);
                    flag = false;
                 }
             }
         }
         if(flag){
-            System.out.println("Khong tim thay ma giam thi, vui long kiem tra lai!");
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
         } else{
-            System.out.println("Sua giam thi thanh cong!");
+            System.out.println("Sua ten giam thi thanh cong!");
+        }
+    }
+    public void suaQQGiamThi(String maGt){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Nhap que quan muon doi: ");
+        String name = sc.nextLine();
+        for(Person x: person){
+            if(x instanceof Supervisor){
+                if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGt)==0){
+                   x.setQueQuan(name);
+                   flag = false;
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua que quan giam thi thanh cong!");
+        }
+    }
+    public void suaNamSinhGiamThi(String maGt){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Nhap nam sinh muon doi: ");
+        int birth = Integer.parseInt(sc.nextLine());
+        for(Person x: person){
+            if(x instanceof Supervisor){
+                if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGt)==0){
+                   x.setNamSinh(birth);
+                   flag = false;
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua nam sinh giam thi thanh cong!");
+        }
+    }
+    public void suaGioiTinhGiamThi(String maGt){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        int gioiTinh;
+        do{
+            System.out.println("Nhap gioi tinh muon sua(nam: 1/nữ: 0)");
+            gioiTinh = sc.nextInt();
+        } while(gioiTinh !=1 && gioiTinh!=0);
+        for(Person x: person){
+            if(x instanceof Supervisor){
+                if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGt)==0){
+                   x.setGioiTinh(gioiTinh);
+                   flag = false;
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua gioi tinh giam thi thanh cong!");
+        }
+    }
+    public void suaMaGT(String maGt){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Nhap ma giam thi muon doi: ");
+        String Sbd = sc.nextLine();
+        for(Person x: person){
+            if(x instanceof Supervisor){
+                if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGt)==0){
+                   ((Supervisor) x).setMaGt(Sbd);
+                   flag = false;
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua ma giam thi thanh cong!");
+        }
+    }
+    public void suaDonViCongTac(String maGt){
+        boolean flag = true;
+        Scanner sc = new Scanner (System.in);
+        System.out.print("Nhap don vi cong tac muon doi: ");
+        String donViCt = sc.nextLine();
+        for(Person x: person){
+            if(x instanceof Supervisor){
+                if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGt)==0){
+                   ((Supervisor) x).setDonViCT(donViCt);
+                   flag = false;
+                }
+            }
+        }
+        if(flag){
+            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
+        } else{
+            System.out.println("Sua ma giam thi thanh cong!");
         }
     }
     
@@ -486,7 +934,6 @@ public class Manage {
     }
     
     
-    
     public void menuChinh(){
         System.out.println("-------------CHƯƠNG TRÌNH QUẢN LÍ TUYỂN SINH ĐẠI HỌC 2024----------------");
         System.out.println("| 1. Nhập danh sách thí sinh và nguyện vọng của thí sinh                 |");
@@ -494,9 +941,9 @@ public class Manage {
         System.out.println("| 3. Hiển thị danh sách các hỗ sơ dự thi                                 |");
         System.out.println("| 4. Hiển thị danh sách các giám thị                                     |");
         System.out.println("| 5. Chỉnh sửa thông tin (Thí Sinh, Nguyên Vọng,Giám Thị)                |");
-        System.out.println("| 6. Hiện ra danh sách trúng tuyền( input: mã ngành, điểm chuẩn)         |");
-        System.out.println("| 7. Lưu file đã nhập                                                    |");
-        System.out.println("| 8. Đọc dữ lệu từ file (thisinh.txt or giamthi.txt)                     |");
+        System.out.println("| 6. Lưu file đã nhập                                                    |");
+        System.out.println("| 7. Đọc dữ lệu từ file (thisinh.txt or giamthi.txt)                     |");
+        System.out.println("| 8. Hiện ra danh sách trúng tuyền( input: mã ngành, điểm chuẩn)         |");
         System.out.println("| 9. Sắp xếp danh sách trúng tuyển theo điểm thi giảm dần                |");
         System.out.println("| 10. Thông kê các giám thị công tác ở Hà Nội                            |");
         System.out.println("-------------.Nhắn phím 0 để thoát chương trình, xin cảm ơn!-------------");
