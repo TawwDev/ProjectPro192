@@ -47,15 +47,18 @@ public class Main {
                     a.SuaDoi();
                     break;
                 case 6:
+                    a.suaNguyenVong();
+                    break;
+                case 7:
                     a.ghiFile();
                     break;
-                case 7: 
+                case 8: 
                     String tenfile;
                     System.out.println("Nhap ten file muon doc:");
                     tenfile = sc.nextLine();
                     a.docFile(tenfile);
                     break;
-                case 8:
+                case 9:
                     System.out.println("Nhap ma nganh: ");
                     String maNganh = sc.nextLine();
                     System.out.println("Nhap diem chuan: ");
@@ -67,10 +70,10 @@ public class Main {
                     a.hienDSTrungTuyen(maNganh, diemChuan);
                     break;
                     
-                case 9: 
+                case 10: 
                     a.SapXepTheoDiem();
                     break;
-                case 10:
+                case 11:
                     System.out.println("Nhap ten don vi cong tac cua Giam thi can tim: ");
                     String donVi = sc.nextLine();
                     a.hienGiamThiCongTac(donVi);

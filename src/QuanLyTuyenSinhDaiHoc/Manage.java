@@ -58,9 +58,6 @@ public class Manage {
         System.out.println("|      2.Xoa thi sinh                  |");
         System.out.println("|      3.Sua thong tin giam thi        |");
         System.out.println("|      4.Xoa giam thi                  |");
-        System.out.println("|      5.Sua nguyen vong               |");
-        System.out.println("|      6.Them nguyen vong              |");
-        System.out.println("|      7.Xoa nguyen vong               |");
         System.out.println("----------Chon so 0 de thoat!-----------");
     }
     
@@ -133,44 +130,6 @@ public class Manage {
                     
                     break;
                 }
-                case 5:{
-                    try{
-                        System.out.println("Nhap SBD cua thi sinh: ");
-                        sc.nextLine();
-                        String sbd = sc.nextLine();
-                        System.out.println("Nhap ma nguyen vong: ");
-                        int maNv = sc.nextInt();
-                        suaNguyenVong(maNv,sbd); 
-                    }catch(InputMismatchException ime){
-                        System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
-                    }
-                    break;   
-                }
-                case 6:{
-                    try{
-                        System.out.println("Nhap SBD cua thi sinh: ");
-                        sc.nextLine();
-                        String sbd = sc.nextLine();
-                        themNguyenVong(sbd);
-                    }catch(InputMismatchException ime){
-                        System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
-                    }
-                    
-                    break;   
-                }
-                case 7:{
-                    try{
-                        System.out.println("Nhap SBD cua thi sinh: ");
-                        sc.nextLine();
-                        String sbd = sc.nextLine();
-                        System.out.println("Nhap ma nguyen vong: ");
-                        int maNv = sc.nextInt();
-                        xoaNguyenVong(maNv,sbd);
-                    }catch(InputMismatchException ime){
-                        System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
-                    }
-                    break;   
-                }
                 default : 
                     System.out.println("Lua chon khong hop le, vui long chon lai!");
                     break;
@@ -180,15 +139,13 @@ public class Manage {
     
     public void menuSuaNguyenVong(){
         System.out.println("------------Sua Nguyen Vong-------------");
-        System.out.println("|         1.Sua ma truong              |");
-        System.out.println("|         2.Sua ma nganh               |");
-        System.out.println("|         3.Sua ten nganh              |");
-        System.out.println("|         4.Sua khoi xet tuyen         |");
-        System.out.println("|         5.Sua diem thi               |");
+        System.out.println("|      1.Them nguyen vong              |");
+        System.out.println("|      2.Xoa nguyen vong               |");
+        System.out.println("|      3.Doi thu tu nguyen vong        |");
         System.out.println("-----------Chon 0 de thoat!-------------");
     }
     
-    public void suaNguyenVong(int maNV, String sbd){
+    public void suaNguyenVong(){
         Scanner sc = new Scanner (System.in);
         int n;
         do{
@@ -196,23 +153,46 @@ public class Manage {
             System.out.print("Lua chon: ");
             n = Integer.parseInt(sc.nextLine());
             switch(n){
-                case 0:
-                    System.out.println("Da thoat!");
-                    break;
-                case 1:
-                    suaMatruong(maNV, sbd);
-                    break;
-                case 2:
-                    suaMaNganh(maNV, sbd);
-                    break;
+                case 1:{
+                    try{
+                        System.out.println("Nhap SBD cua thi sinh: ");
+                        String sbd = sc.nextLine();
+                        themNguyenVong(sbd);
+                    }catch(InputMismatchException ime){
+                        System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
+                    }
+                    
+                    break;   
+                }
+                case 2:{
+                    try{
+                        System.out.println("Nhap SBD cua thi sinh: ");
+                        String sbd = sc.nextLine();
+                        System.out.println("Nhap ma nguyen vong: ");
+                        int maNv = sc.nextInt();
+                        xoaNguyenVong(maNv,sbd);
+                    }catch(InputMismatchException ime){
+                        System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
+                    }
+                    break;   
+                }
                 case 3:
-                    suaTenNganh(maNV, sbd);
-                    break;
-                case 4:
-                    suaKhoiXetTuyen(maNV, sbd);
-                    break;
-                case 5:
-                    suaDiemThi(maNV, sbd);
+                    System.out.println("Nhap sbd thi sinh muon doi vi tri nguyen vong:");
+                    String sbD = sc.nextLine(); 
+                    
+                    try{
+                        System.out.print("Nhap chi so muon doi: ");
+                        int index1 = Integer.parseInt(sc.nextLine());
+                        System.out.print("Nhap vi tri muon doi: ");
+                        int index2 = Integer.parseInt(sc.nextLine()); 
+                        doiViTriNV(sbD, index1, index2);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Chi so phai la so nguyen.");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                    } catch (Exception e) {
+                        System.out.println("Loi khac: " + e.getMessage());
+                    }
                     break;
                 default:
                     System.out.println("Lua chon khong hop le, vui long nhap lai!");
@@ -222,110 +202,34 @@ public class Manage {
         
     }
     
+    public static <T> void swapElements(ArrayList<T> list, int index1, int index2) {
+        if (index1 < 0 || index1 >= list.size() || index2 < 0 || index2 >= list.size()) {
+            throw new IndexOutOfBoundsException("Chi so khong hop le.");
+        }
+        Collections.swap(list, index1, index2);
+    }
     
-    public void suaMatruong(int maNV, String sbd){
-        Scanner sc = new Scanner (System.in);
-        boolean flag = true;
-        System.out.print("Nhap ma truong muon doi: ");
-        String maTruong = sc.nextLine();
-        for(Person x: person){
-            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
-                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
-                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
-                        ((Student)x).getNguyenVong().get(i).setMaTruong(maTruong);
-                        flag = false;
-                    }
-                }
+    public void doiViTriNV(String sbd, int index1, int index2){
+        boolean foundSbd = false;
+        boolean check = false;
+        if(index1 == index2){
+            System.out.println("Vi tri doi giu nguyen do 2 chi so bang nhau!");
+            return;
+        }
+        for (Person x : person) {
+            if (x instanceof Student && ((Student) x).getSBD().equalsIgnoreCase(sbd)) {
+                foundSbd = true;
+                ArrayList<Wish> nguyenVongList = ((Student) x).getNguyenVong();
+                swapElements(nguyenVongList, index1-1, index2-1);
+                check = true;
             }
         }
-        if(flag){
-            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
-        }else {
-            System.out.println("Sua thanh cong!");
+        
+        if (!foundSbd) {
+            System.out.println("Khong tim thay SBD, vui long kiem tra lai!");
         }
-    }
-    public void suaMaNganh(int maNV, String sbd){
-        Scanner sc = new Scanner (System.in);
-        boolean flag = true;
-        System.out.print("Nhap ma nganh muon doi: ");
-        String maNganh = sc.nextLine();
-        for(Person x: person){
-            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
-                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
-                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
-                        ((Student)x).getNguyenVong().get(i).setMaNganh(maNganh);
-                        flag = false;
-                    }
-                }
-            }
-        }
-        if(flag){
-            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
-        }else {
-            System.out.println("Sua thanh cong!");
-        }
-    }
-    public void suaTenNganh(int maNV, String sbd){
-        Scanner sc = new Scanner (System.in);
-        boolean flag = true;
-        System.out.print("Nhap ten nganh muon doi: ");
-        String tenNganh = sc.nextLine();
-        for(Person x: person){
-            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
-                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
-                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
-                        ((Student)x).getNguyenVong().get(i).setTenNganh(tenNganh);
-                        flag = false;
-                    }
-                }
-            }
-        }
-        if(flag){
-            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
-        }else {
-            System.out.println("Sua thanh cong!");
-        }
-    }
-    public void suaKhoiXetTuyen(int maNV, String sbd){
-        Scanner sc = new Scanner (System.in);
-        boolean flag = true;
-        System.out.print("Nhap khoi xet tuyen muon doi: ");
-        String khoiXT = sc.nextLine();
-        for(Person x: person){
-            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
-                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
-                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
-                        ((Student)x).getNguyenVong().get(i).setKhoiXt(khoiXT);
-                        flag = false;
-                    }
-                }
-            }
-        }
-        if(flag){
-            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
-        }else {
-            System.out.println("Sua thanh cong!");
-        }
-    }
-    public void suaDiemThi(int maNV, String sbd){
-        Scanner sc = new Scanner (System.in);
-        boolean flag = true;
-        System.out.print("Nhap diem thi muon doi: ");
-        float diemThi = Float.parseFloat(sc.nextLine());
-        for(Person x: person){
-            if(((Student)x).getSBD().compareToIgnoreCase(sbd) ==0){
-                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
-                    if(((Student)x).getNguyenVong().get(i).getMaNv() == maNV-1){
-                        ((Student)x).getNguyenVong().get(i).setDiemThi(diemThi);
-                        flag = false;
-                    }
-                }
-            }
-        }
-        if(flag){
-            System.out.println("Khong tim thay ma nguyen vong hoac sbd, vui long kiem tra lai!");
-        }else {
-            System.out.println("Sua thanh cong!");
+        if(check){
+            System.out.println("Da doi vi tri thanh cong!");
         }
     }
     
@@ -983,12 +887,13 @@ public class Manage {
         System.out.println("|      2. Nhap danh sach giam thi coi thi                                |");
         System.out.println("|      3. Hien thi danh sach cac ho so du thi                            |");
         System.out.println("|      4. Hien thi danh sach cac giam thi                                |");
-        System.out.println("|      5. Chinh sua thong tin (Thi Sinh, Nguyen Vong, Giam Thi)          |");
-        System.out.println("|      6. Luu file da nhap                                               |");
-        System.out.println("|      7. Doc du lieu tu file (thisinh.txt or giamthi.txt)               |");
-        System.out.println("|      8. Hien ra danh sach trung tuyen (input: ma nganh, diem chuan)    |");
-        System.out.println("|      9. Sap xep danh sach trung tuyen theo diem thi giam dan           |");
-        System.out.println("|      10. Thong ke cac giam thi cong tac                                |");
+        System.out.println("|      5. Chinh sua thong tin (Thi Sinh, Giam Thi)                       |");
+        System.out.println("|      6. Chinh sua Nguyen Vong (Them, Xoa, Doi vi tri)                  |");
+        System.out.println("|      7. Luu file da nhap                                               |");
+        System.out.println("|      8. Doc du lieu tu file (thisinh.txt or giamthi.txt)               |");
+        System.out.println("|      9. Hien ra danh sach trung tuyen (input: ma nganh, diem chuan)    |");
+        System.out.println("|      10. Sap xep danh sach trung tuyen theo diem thi giam dan           |");
+        System.out.println("|      11. Thong ke cac giam thi cong tac                                |");
         System.out.println("--------------Nhan phim 0 de thoat chuong trinh, xin cam on!-------------");
     }
 }
