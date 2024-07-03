@@ -79,6 +79,10 @@ public class Manage {
                         System.out.println("Nhap SBD cua thi sinh can sua: ");
                         sc.nextLine();
                         sbd = sc.nextLine();
+                        if(checkSBD(sbd)){
+                            System.out.println("Khong tim thay sbd trong danh sach!");
+                            break;
+                        }
                         suaTS(sbd);
                     } catch(InputMismatchException ime){
                         System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
@@ -106,6 +110,10 @@ public class Manage {
                         System.out.println("Nhap ma giam thi can sua thong tin: ");
                         sc.nextLine();
                         maGT = sc.nextLine();
+                        if(checkMaGT(maGT)){
+                            System.out.println("Khong tim thay ma giam thi trong danh sach!");
+                            break;
+                        }
                         suaGt(maGT);
                     } catch(InputMismatchException ime){
                         System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
@@ -426,6 +434,18 @@ public class Manage {
             }
         }while(n!=0);
     }
+    
+    public boolean checkSBD (String sbd){
+        for(Person x: person){
+            if(x instanceof Student){
+                if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
+                   return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public void suaTenThiSinh(String sbd){
         boolean flag = true;
         Scanner sc = new Scanner (System.in);
@@ -615,6 +635,18 @@ public class Manage {
             }
         } while (n!=0);
     }
+    
+    public boolean checkMaGT(String maGT){
+        for(Person x: person){
+            if(x instanceof Supervisor){
+                if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGT)==0){
+                   return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public void suaTenGiamThi(String maGt){
         boolean flag = true;
         Scanner sc = new Scanner (System.in);
