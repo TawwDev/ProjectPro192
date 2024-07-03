@@ -3,6 +3,7 @@ package QuanLyTuyenSinhDaiHoc;
 
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.ConcurrentModificationException;
@@ -14,7 +15,7 @@ public class Manage {
     private ArrayList<Person> person;
     private ArrayList<Student> dsTrungTuyenNganh;
     private ArrayList<Wish> nvTrungTuyen;
-    
+    private ArrayList<TrungTuyen> trungTuyen;
     public Manage(){
         person = new ArrayList();
     }
@@ -163,6 +164,7 @@ public class Manage {
                     break;   
                 }
                 default : 
+                    System.out.println("Lua chon khong hop le, vui long chon lai!");
                     break;
             }
         } while (n !=0);
@@ -788,38 +790,6 @@ public class Manage {
         }
     }
     
-    public void hienDSTrungTuyen(String maNganh, float diemChuan){
-        dsTrungTuyenNganh = new ArrayList<>();
-        nvTrungTuyen = new ArrayList<>();
-        boolean check = true;
-        int index =1;
-        for(Person x : person){
-            if(x instanceof Student){
-                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
-                    float tongDiem = ((Student)x).getNguyenVong().get(i).getDiemThi() +((Student) x).getDiemUuTien();
-                    if(((Student)x).getNguyenVong().get(i).getMaNganh().compareTo(maNganh) == 0 && tongDiem >= diemChuan){
-                        System.out.print(index++ + ". ");
-                        ((Student)x).hienThongTinTs();
-                        ((Student)x).getNguyenVong().get(i).hienNguyenVong();
-                        dsTrungTuyenNganh.add((Student)x);
-                        nvTrungTuyen.add(((Student)x).getNguyenVong().get(i));
-                        check = false;
-                    }
-                }
-            }
-        }
-        if(check){
-            System.out.println("Khong co thi sinh nao trung tuyen ma nganh: " + maNganh);
-        }
-    }
-    
-    public void hienDSTTNganh(){
-        int index =1;
-        for(Wish x : nvTrungTuyen){
-            System.out.print(index++ +". ");
-            x.hienNguyenVong();
-        }
-    }
     
     public void menuFile(){
         System.out.println("-------------------------------");
@@ -915,14 +885,46 @@ public class Manage {
         }
     }
     
+    public void hienDSTrungTuyen(String maNganh, float diemChuan){
+        trungTuyen = new ArrayList<>();
+        boolean check = true;
+        int index =1;
+        for(Person x : person){
+            if(x instanceof Student){
+                for(int i=0; i<((Student)x).getNguyenVong().size(); i++){
+                    float tongDiem = ((Student)x).getNguyenVong().get(i).getDiemThi() +((Student) x).getDiemUuTien();
+                    if(((Student)x).getNguyenVong().get(i).getMaNganh().compareTo(maNganh) == 0 && tongDiem >= diemChuan){
+                        System.out.print(index++ + ". ");
+                        ((Student)x).hienThongTinTs();
+                        ((Student)x).getNguyenVong().get(i).hienNguyenVong();
+                        trungTuyen.add(new TrungTuyen((Student)x, ((Student)x).getNguyenVong().get(i)));
+                        check = false;
+                    }
+                }
+            }
+        }
+        if(check){
+            System.out.println("Khong co thi sinh nao trung tuyen ma nganh: " + maNganh);
+        }
+    }
+    
+    public void hienDSTTNganh(){
+        int index =1;
+        for(TrungTuyen x : trungTuyen){
+            System.out.println(index++ + ". ");
+            x.getStudent().hienThongTinTs();
+            x.getNguyenVong().hienNguyenVong();
+        }
+    }
+    
     public void SapXepTheoDiem(){
         Scanner sc = new Scanner (System.in);
-        Collections.sort(nvTrungTuyen, new Comparator<Wish>(){
+        Collections.sort(trungTuyen, new Comparator<TrungTuyen>(){
             @Override
-            public int compare(Wish o1, Wish o2) {
-               if(o1.getDiemThi() > o2.getDiemThi()){
+            public int compare(TrungTuyen o1, TrungTuyen o2) {
+               if(o1.getNguyenVong().getDiemThi()> o2.getNguyenVong().getDiemThi()){
                    return -1;
-               } else if(o1.getDiemThi() < o2.getDiemThi()){
+               } else if(o1.getNguyenVong().getDiemThi() < o2.getNguyenVong().getDiemThi()){
                    return 1;
                } else{
                    return 0;
@@ -932,10 +934,10 @@ public class Manage {
         hienDSTTNganh();
     }
     
-    public void hienGiamThioHaNoi(){
+    public void hienGiamThiCongTac(String donViCt){
         int index =1;
         for(Person x : person){
-            if(x instanceof Supervisor && ((Supervisor)x).getQueQuan().equalsIgnoreCase("Ha Noi")== true){
+            if(x instanceof Supervisor && ((Supervisor)x).getQueQuan().equalsIgnoreCase(donViCt)== true){
                 System.out.print(index++ + ". ");
                 x.hien();
             }
@@ -954,7 +956,7 @@ public class Manage {
         System.out.println("|      7. Doc du lieu tu file (thisinh.txt or giamthi.txt)               |");
         System.out.println("|      8. Hien ra danh sach trung tuyen (input: ma nganh, diem chuan)    |");
         System.out.println("|      9. Sap xep danh sach trung tuyen theo diem thi giam dan           |");
-        System.out.println("|      10. Thong ke cac giam thi cong tac o Ha Noi                       |");
+        System.out.println("|      10. Thong ke cac giam thi cong tac                                |");
         System.out.println("--------------Nhan phim 0 de thoat chuong trinh, xin cam on!-------------");
     }
 }

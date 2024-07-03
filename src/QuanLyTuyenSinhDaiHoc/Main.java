@@ -63,15 +63,17 @@ public class Main {
                     if(diemChuan <0 || diemChuan >30){
                         System.out.println("Diem chuan (0-30), Diem nhap khong hop le vui long nhap lai!");
                         break;
-                    } else {
-                        a.hienDSTrungTuyen(maNganh, diemChuan);
-                        break;
                     }
+                    a.hienDSTrungTuyen(maNganh, diemChuan);
+                    break;
+                    
                 case 9: 
                     a.SapXepTheoDiem();
                     break;
                 case 10:
-                    a.hienGiamThioHaNoi();
+                    System.out.println("Nhap ten don vi cong tac cua Giam thi can tim: ");
+                    String donVi = sc.nextLine();
+                    a.hienGiamThiCongTac(donVi);
                     break;
                 default:
                     System.out.println("Lua chon khong hop le, vui long chon lai!");
