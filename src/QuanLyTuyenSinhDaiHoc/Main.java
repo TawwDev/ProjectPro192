@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Manage a = new Manage();
+    Manage a = new Manage();
     Scanner sc = new Scanner(System.in);
     Person b;
     int choice;
@@ -63,8 +63,8 @@ public class Main {
                     String maNganh = sc.nextLine();
                     System.out.println("Nhap diem chuan: ");
                     float diemChuan = sc.nextFloat();
-                    if(diemChuan <0 || diemChuan >30){
-                        System.out.println("Diem chuan (0-30), Diem nhap khong hop le vui long nhap lai!");
+                    if(diemChuan <0){
+                        System.out.println("Diem phai lon hon 0, vui long nhap lai!");
                         break;
                     }
                     a.hienDSTrungTuyen(maNganh, diemChuan);

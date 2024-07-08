@@ -11,7 +11,7 @@ import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Manage {
+public class Manage implements IManagement{
     private ArrayList<Person> person;
     private ArrayList<Student> dsTrungTuyenNganh;
     private ArrayList<Wish> nvTrungTuyen;
@@ -138,11 +138,11 @@ public class Manage {
     }
     
     public void menuSuaNguyenVong(){
-        System.out.println("------------Sua Nguyen Vong-------------");
-        System.out.println("|      1.Them nguyen vong              |");
-        System.out.println("|      2.Xoa nguyen vong               |");
-        System.out.println("|      3.Doi thu tu nguyen vong        |");
-        System.out.println("-----------Chon 0 de thoat!-------------");
+        System.out.println("------------Sua Nguyen Vong---------------");
+        System.out.println("|      1.Them nguyen vong                |");
+        System.out.println("|      2.Xoa nguyen vong                 |");
+        System.out.println("|      3.Swap 2 nguyen vong              |");
+        System.out.println("-----------Chon 0 de thoat!---------------");
     }
     
     public void suaNguyenVong(){
@@ -181,11 +181,11 @@ public class Manage {
                     String sbD = sc.nextLine(); 
                     
                     try{
-                        System.out.print("Nhap chi so muon doi: ");
+                        System.out.print("Nhap ma nguyen vong muon doi: ");
                         int index1 = Integer.parseInt(sc.nextLine());
-                        System.out.print("Nhap vi tri muon doi: ");
+                        System.out.print("Nhap ma nguyen vong muon doi: ");
                         int index2 = Integer.parseInt(sc.nextLine()); 
-                        doiViTriNV(sbD, index1, index2);
+                        swapNV(sbD, index1, index2);
                     } catch (NumberFormatException e) {
                         System.out.println("Chi so phai la so nguyen.");
                     } catch (IndexOutOfBoundsException e) {
@@ -209,7 +209,7 @@ public class Manage {
         Collections.swap(list, index1, index2);
     }
     
-    public void doiViTriNV(String sbd, int index1, int index2){
+    public void swapNV(String sbd, int index1, int index2){
         boolean foundSbd = false;
         boolean check = false;
         if(index1 == index2){
@@ -892,7 +892,7 @@ public class Manage {
         System.out.println("|      7. Luu file da nhap                                               |");
         System.out.println("|      8. Doc du lieu tu file (thisinh.txt or giamthi.txt)               |");
         System.out.println("|      9. Hien ra danh sach trung tuyen (input: ma nganh, diem chuan)    |");
-        System.out.println("|      10. Sap xep danh sach trung tuyen theo diem thi giam dan           |");
+        System.out.println("|      10. Sap xep danh sach trung tuyen theo diem thi giam dan          |");
         System.out.println("|      11. Thong ke cac giam thi cong tac                                |");
         System.out.println("--------------Nhan phim 0 de thoat chuong trinh, xin cam on!-------------");
     }

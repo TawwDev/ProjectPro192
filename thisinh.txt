@@ -1,1 +1,0 @@
-1. Student,Ho ten: Nguyen Minh Tam,Que quan: Yen Bai,Nam sinh: 2004,Gioi Tinh: Nam,Sbd: he123, Diem uu tien: 0.25
