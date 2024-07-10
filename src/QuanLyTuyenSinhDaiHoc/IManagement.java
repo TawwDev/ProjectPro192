@@ -5,79 +5,79 @@ import QuanLyTuyenSinhDaiHoc.Person;
 
 
 public interface IManagement {
-    void themDsNguoi(Person a);
+    public void themDsNguoi(Person a);
     
-    void SuaDoi();
+    public void SuaDoi();
     
-    void suaNguyenVong();
+    public void suaNguyenVong();
     
-    void swapNV(String sbd, int index1, int index2);
+    public void swapNV(String sbd, int index1, int index2);
     
-    void xoaNguyenVong(int maNV, String sbd);
+    public void xoaNguyenVong(int maNV, String sbd);
     
-    void themNguyenVong(String sbd);
+    public void themNguyenVong(String sbd);
     
-    void suaTS(String sbd);
+    public void suaTS(String sbd);
     
-    boolean checkSBD(String sbd);
+    public boolean checkSBD(String sbd);
     
-    void suaTenThiSinh(String sbd);
+    public void suaTenThiSinh(String sbd);
     
-    void suaQQThiSinh(String sbd);
+    public void suaQQThiSinh(String sbd);
     
-    void suaNamSinhThiSinh(String sbd);
+    public void suaNamSinhThiSinh(String sbd);
     
-    void suaSbdThiSinh(String sbd);
+    public void suaSbdThiSinh(String sbd);
     
-    void suaDiemUuTienThiSinh(String sbd);
+    public void suaDiemUuTienThiSinh(String sbd);
     
-    void suaGioiTinhThiSinh(String sbd);
+    public void suaGioiTinhThiSinh(String sbd);
     
-    void xoaThiSinh(String sbd);
+    public void xoaThiSinh(String sbd);
     
-    void suaGt(String maGt);
+    public void suaGt(String maGt);
     
-    boolean checkMaGT(String maGT);
+    public boolean checkMaGT(String maGT);
     
-    void suaTenGiamThi(String maGt);
+    public void suaTenGiamThi(String maGt);
     
-    void suaQQGiamThi(String maGt);
+    public void suaQQGiamThi(String maGt);
     
-    void suaNamSinhGiamThi(String maGt);
+    public void suaNamSinhGiamThi(String maGt);
     
-    void suaGioiTinhGiamThi(String maGt);
+    public void suaGioiTinhGiamThi(String maGt);
     
-    void suaDonViCongTac(String maGt);
+    public void suaDonViCongTac(String maGt);
     
-    void suaMaGT(String maGt);
+    public void suaMaGT(String maGt);
 
-    void xoaGiamThi(String maGT);
+    public void xoaGiamThi(String maGT);
 
-    void hienDSGiamThi();
+    public void hienDSGiamThi();
 
-    void hienDS();
+    public void hienDS();
 
-    void hienDSHoSoThiSinh();
+    public void hienDSHoSoThiSinh();
 
-    void hienDSThiSinh();
+    public void hienDSThiSinh();
 
-    void menuFile();
+    public void menuFile();
 
-    void ghiFile();
+    public void ghiFile();
 
-    void ghiFileStudent();
+    public void ghiFileStudent();
 
-    void ghiFileSupervisor();
+    public void ghiFileSupervisor();
 
-    void docFile(String fileName);
+    public void docFile(String fileName);
 
-    void hienDSTrungTuyen(String maNganh, float diemChuan);
+    public void hienDSTrungTuyen(String maNganh, float diemChuan);
 
-    void hienDSTTNganh();
+    public void hienDSTTNganh();
 
-    void SapXepTheoDiem();
+    public void SapXepTheoDiem();
 
-    void hienGiamThiCongTac(String donViCt);
+    public void hienGiamThiCongTac(String donViCt);
 
-    void menuChinh();
+    public void menuChinh();
 }

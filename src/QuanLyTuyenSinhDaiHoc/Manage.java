@@ -13,13 +13,12 @@ import java.util.Scanner;
 
 public class Manage implements IManagement{
     private ArrayList<Person> person;
-    private ArrayList<Student> dsTrungTuyenNganh;
-    private ArrayList<Wish> nvTrungTuyen;
     private ArrayList<TrungTuyen> trungTuyen;
     public Manage(){
         person = new ArrayList();
     }
     
+    //Them danh sach sinh vien, giam thi
     public void themDsNguoi(Person a) {
         Scanner sc = new Scanner(System.in);
         System.out.print("Nhap so luong can them: ");   
@@ -52,6 +51,7 @@ public class Manage implements IManagement{
         return newName.trim();
     }
     
+    //Sua thong tin thi sinh, giam thi.
     public void menuSuaDoi() {
         System.out.println("-----------Moi ban lua chon-------------");
         System.out.println("|      1.Sua thong tin thi sinh        |");
@@ -127,7 +127,6 @@ public class Manage implements IManagement{
                     }catch(InputMismatchException ime){
                         System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
                     }
-                    
                     break;
                 }
                 default : 
@@ -137,11 +136,13 @@ public class Manage implements IManagement{
         } while (n !=0);
     }
     
+    //Sua nguyen vong
     public void menuSuaNguyenVong(){
         System.out.println("------------Sua Nguyen Vong---------------");
         System.out.println("|      1.Them nguyen vong                |");
         System.out.println("|      2.Xoa nguyen vong                 |");
         System.out.println("|      3.Swap 2 nguyen vong              |");
+        System.out.println("|      4.Chen nguyen vong                |");
         System.out.println("-----------Chon 0 de thoat!---------------");
     }
     
@@ -156,8 +157,12 @@ public class Manage implements IManagement{
                 case 1:{
                     try{
                         System.out.println("Nhap SBD cua thi sinh: ");
-                        String sbd = sc.nextLine();
-                        themNguyenVong(sbd);
+                        String sbd1 = sc.nextLine();
+                        if(checkSBD(sbd1)){
+                            System.out.println("So bao danh khong ton tai!");
+                            break;
+                        }
+                        themNguyenVong(sbd1);
                     }catch(InputMismatchException ime){
                         System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
                     }
@@ -167,10 +172,14 @@ public class Manage implements IManagement{
                 case 2:{
                     try{
                         System.out.println("Nhap SBD cua thi sinh: ");
-                        String sbd = sc.nextLine();
+                        String sbd2 = sc.nextLine();
+                        if(checkSBD(sbd2)){
+                            System.out.println("So bao danh khong ton tai!");
+                            break;
+                        }
                         System.out.println("Nhap ma nguyen vong: ");
                         int maNv = sc.nextInt();
-                        xoaNguyenVong(maNv,sbd);
+                        xoaNguyenVong(maNv,sbd2);
                     }catch(InputMismatchException ime){
                         System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
                     }
@@ -178,14 +187,38 @@ public class Manage implements IManagement{
                 }
                 case 3:
                     System.out.println("Nhap sbd thi sinh muon doi vi tri nguyen vong:");
-                    String sbD = sc.nextLine(); 
-                    
+                    String sbd3 = sc.nextLine(); 
+                    if(checkSBD(sbd3)){
+                        System.out.println("So bao danh khong ton tai!");
+                        break;
+                    }
                     try{
-                        System.out.print("Nhap ma nguyen vong muon doi: ");
+                        System.out.print("Nhap ma nguyen vong muon swap: ");
                         int index1 = Integer.parseInt(sc.nextLine());
-                        System.out.print("Nhap ma nguyen vong muon doi: ");
+                        System.out.print("Nhap ma nguyen vong muon swap: ");
                         int index2 = Integer.parseInt(sc.nextLine()); 
-                        swapNV(sbD, index1, index2);
+                        swapNV(sbd3, index1, index2);
+                    } catch (NumberFormatException e) {
+                        System.out.println("Chi so phai la so nguyen.");
+                    } catch (IndexOutOfBoundsException e) {
+                        System.out.println(e.getMessage());
+                    } catch (Exception e) {
+                        System.out.println("Loi khac: " + e.getMessage());
+                    }
+                    break;
+                case 4:
+                    System.out.println("Nhap sbd thi sinh muon doi vi tri nguyen vong:");
+                    String sbd4 = sc.nextLine(); 
+                    if(checkSBD(sbd4)){
+                        System.out.println("So bao danh khong ton tai!");
+                        break;
+                    }
+                    try{
+                        System.out.print("Nhap ma nguyen vong muon doi vi tri: ");
+                        int index1 = Integer.parseInt(sc.nextLine());
+                        System.out.print("Nhap ma nguyen vong muon chen: ");
+                        int index2 = Integer.parseInt(sc.nextLine()); 
+                        viTriNV(sbd4, index1, index2);
                     } catch (NumberFormatException e) {
                         System.out.println("Chi so phai la so nguyen.");
                     } catch (IndexOutOfBoundsException e) {
@@ -210,7 +243,6 @@ public class Manage implements IManagement{
     }
     
     public void swapNV(String sbd, int index1, int index2){
-        boolean foundSbd = false;
         boolean check = false;
         if(index1 == index2){
             System.out.println("Vi tri doi giu nguyen do 2 chi so bang nhau!");
@@ -218,16 +250,38 @@ public class Manage implements IManagement{
         }
         for (Person x : person) {
             if (x instanceof Student && ((Student) x).getSBD().equalsIgnoreCase(sbd)) {
-                foundSbd = true;
                 ArrayList<Wish> nguyenVongList = ((Student) x).getNguyenVong();
                 swapElements(nguyenVongList, index1-1, index2-1);
                 check = true;
             }
         }
         
-        if (!foundSbd) {
-            System.out.println("Khong tim thay SBD, vui long kiem tra lai!");
+        if(check){
+            System.out.println("Da doi vi tri thanh cong!");
         }
+    }
+    
+    public void viTriNV(String sbd, int index1, int index2){
+        boolean check = false;
+        if(index1 == index2){
+            System.out.println("Vi tri doi giu nguyen do 2 chi so bang nhau!");
+            return;
+        }
+        for (Person x : person) {
+            if (x instanceof Student && ((Student) x).getSBD().equalsIgnoreCase(sbd)) {
+                ArrayList<Wish> nguyenVongList = ((Student) x).getNguyenVong();
+                
+                if(index1 < 1 || index1 > nguyenVongList.size() || index2 < 1 || index2 > nguyenVongList.size()) {
+                    System.out.println("Index khong hop le!");
+                    return;
+                }
+                
+                Wish nguyenVong = nguyenVongList.get(index1-1);
+                nguyenVongList.remove(index1-1);
+                nguyenVongList.add(index2-1, nguyenVong);
+                check = true;
+            }
+        } 
         if(check){
             System.out.println("Da doi vi tri thanh cong!");
         }
@@ -240,17 +294,14 @@ public class Manage implements IManagement{
         }
         maNV -= 1;
 
-        boolean foundSbd = false;
         boolean deleted = false;
 
         for (Person x : person) {
             if (x instanceof Student && ((Student) x).getSBD().equalsIgnoreCase(sbd)) {
-                foundSbd = true;
                 ArrayList<Wish> nguyenVongList = ((Student) x).getNguyenVong();
 
                 if (maNV < nguyenVongList.size() && maNV >= 0) {
                     Wish wishToRemove = nguyenVongList.get(maNV);
-                
                     nguyenVongList.remove(wishToRemove);
                     deleted = true;
                     System.out.println("Xoa thanh cong nguyen vong co ma: " + (maNV + 1));
@@ -261,10 +312,7 @@ public class Manage implements IManagement{
                 }
             }
         }
-
-        if (!foundSbd) {
-            System.out.println("Khong tim thay SBD, vui long kiem tra lai!");
-        } else if (!deleted) {
+        if (!deleted) {
             System.out.println("Xoa khong thanh cong, nguyen vong khong ton tai!");
         }
     }
@@ -286,13 +334,12 @@ public class Manage implements IManagement{
                 }               
             }
         }
-        if(flag){
-            System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
-        } else{
+        if(!flag){
             System.out.println("Them nguyen vong thanh cong!");
         }
     }
     
+    //Sua thi sinh
     public void menuSuaThiSinh(){
         System.out.println("----------Sua thong tin thi sinh---------");
         System.out.println("|           1.Sua ten                   |");
@@ -492,6 +539,8 @@ public class Manage implements IManagement{
         }
     }
     
+    
+    //Sua giam thi
     public void menuSuaGT(){
         System.out.println("------------Sua thong tin giam thi-----------");
         System.out.println("|        1.Sua ho ten giam thi               |"); 
@@ -688,6 +737,7 @@ public class Manage implements IManagement{
         }
     }
     
+    //Hien thong tin
     public void hienDSGiamThi(){
         System.out.println("--------------------------");
         int index=1;
@@ -716,6 +766,7 @@ public class Manage implements IManagement{
             }
         }
     }
+    
     public void hienDSThiSinh(){
         System.out.println("--------------------------");
         
@@ -727,6 +778,7 @@ public class Manage implements IManagement{
     }
     
     
+    //Quan li file
     public void menuFile(){
         System.out.println("-------------------------------");
         System.out.println("|  1. ghi thi sinh vao file.  |");
@@ -821,6 +873,7 @@ public class Manage implements IManagement{
         }
     }
     
+    //Hien danh sach trung tuyen
     public void hienDSTrungTuyen(String maNganh, float diemChuan){
         trungTuyen = new ArrayList<>();
         boolean check = true;
@@ -844,6 +897,7 @@ public class Manage implements IManagement{
         }
     }
     
+    //Sap xep theo diem
     public void hienDSTTNganh(){
         int index =1;
         for(TrungTuyen x : trungTuyen){
@@ -870,6 +924,7 @@ public class Manage implements IManagement{
         hienDSTTNganh();
     }
     
+    //Hien thi noi cong tac cua giam thi
     public void hienGiamThiCongTac(String donViCt){
         int index =1;
         for(Person x : person){
