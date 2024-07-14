@@ -18,6 +18,22 @@ public class Manage implements IManagement{
         person = new ArrayList();
     }
     
+    public void menuChinh(){
+        System.out.println("-------------CHUONG TRINH QUAN LI TUYEN SINH DAI HOC 2024----------------");
+        System.out.println("|      1. Nhap danh sach thi sinh va nguyen vong cua thi sinh            |");
+        System.out.println("|      2. Nhap danh sach giam thi coi thi                                |");
+        System.out.println("|      3. Hien thi danh sach cac ho so du thi                            |");
+        System.out.println("|      4. Hien thi danh sach cac giam thi                                |");
+        System.out.println("|      5. Chinh sua thong tin (Thi Sinh, Giam Thi)                       |");
+        System.out.println("|      6. Chinh sua Nguyen Vong (Them, Xoa, Doi vi tri)                  |");
+        System.out.println("|      7. Luu file da nhap                                               |");
+        System.out.println("|      8. Doc du lieu tu file (thisinh.txt or giamthi.txt)               |");
+        System.out.println("|      9. Hien ra danh sach trung tuyen (input: ma nganh, diem chuan)    |");
+        System.out.println("|      10. Sap xep danh sach trung tuyen theo diem thi giam dan          |");
+        System.out.println("|      11. Thong ke cac giam thi cong tac                                |");
+        System.out.println("--------------Nhan phim 0 de thoat chuong trinh, xin cam on!-------------");
+    }
+    
     //Them danh sach sinh vien, giam thi
     public void themDsNguoi(Person a) {
         Scanner sc = new Scanner(System.in);
@@ -70,6 +86,9 @@ public class Manage implements IManagement{
             n = sc.nextInt();
             
             switch(n){
+                case 0:
+                    System.out.println("Thoat thanh cong!");
+                    break;
                 case 1:{
                     try {
                         String sbd;
@@ -154,6 +173,9 @@ public class Manage implements IManagement{
             System.out.print("Lua chon: ");
             n = Integer.parseInt(sc.nextLine());
             switch(n){
+                case 0:
+                    System.out.println("Thoat thanh cong!");
+                    break;
                 case 1:{
                     try{
                         System.out.println("Nhap SBD cua thi sinh: ");
@@ -791,7 +813,7 @@ public class Manage implements IManagement{
         int n;
         do{
             menuFile();
-            System.out.print("Chọn: ");
+            System.out.print("Chon: ");
             n = Integer.parseInt(sc.nextLine());
             
             switch(n){
@@ -928,7 +950,7 @@ public class Manage implements IManagement{
     public void hienGiamThiCongTac(String donViCt){
         int index =1;
         for(Person x : person){
-            if(x instanceof Supervisor && ((Supervisor)x).getQueQuan().equalsIgnoreCase(donViCt)== true){
+            if(x instanceof Supervisor && ((Supervisor)x).getDonViCT().equalsIgnoreCase(donViCt)== true){
                 System.out.print(index++ + ". ");
                 x.hien();
             }
@@ -936,19 +958,5 @@ public class Manage implements IManagement{
     }
     
     
-    public void menuChinh(){
-        System.out.println("-------------CHUONG TRINH QUAN LI TUYEN SINH DAI HOC 2024----------------");
-        System.out.println("|      1. Nhap danh sach thi sinh va nguyen vong cua thi sinh            |");
-        System.out.println("|      2. Nhap danh sach giam thi coi thi                                |");
-        System.out.println("|      3. Hien thi danh sach cac ho so du thi                            |");
-        System.out.println("|      4. Hien thi danh sach cac giam thi                                |");
-        System.out.println("|      5. Chinh sua thong tin (Thi Sinh, Giam Thi)                       |");
-        System.out.println("|      6. Chinh sua Nguyen Vong (Them, Xoa, Doi vi tri)                  |");
-        System.out.println("|      7. Luu file da nhap                                               |");
-        System.out.println("|      8. Doc du lieu tu file (thisinh.txt or giamthi.txt)               |");
-        System.out.println("|      9. Hien ra danh sach trung tuyen (input: ma nganh, diem chuan)    |");
-        System.out.println("|      10. Sap xep danh sach trung tuyen theo diem thi giam dan          |");
-        System.out.println("|      11. Thong ke cac giam thi cong tac                                |");
-        System.out.println("--------------Nhan phim 0 de thoat chuong trinh, xin cam on!-------------");
-    }
+    
 }
