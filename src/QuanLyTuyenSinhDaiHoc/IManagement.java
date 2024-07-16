@@ -53,8 +53,6 @@ public interface IManagement {
 
     public void xoaGiamThi(String maGT);
 
-    public void hienDSGiamThi();
-
     public void hienDS();
 
     public void hienDSHoSoThiSinh();
@@ -76,8 +74,6 @@ public interface IManagement {
     public void hienDSTTNganh();
 
     public void SapXepTheoDiem();
-
-    public void hienGiamThiCongTac(String donViCt);
 
     public void menuChinh();
 }

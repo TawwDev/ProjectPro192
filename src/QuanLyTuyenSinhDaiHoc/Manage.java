@@ -201,6 +201,7 @@ public class Manage implements IManagement{
                         }
                         System.out.println("Nhap ma nguyen vong: ");
                         int maNv = sc.nextInt();
+                        sc.nextLine();
                         xoaNguyenVong(maNv,sbd2);
                     }catch(InputMismatchException ime){
                         System.out.println("Du lieu nhap khong hop le. Vui long thu lai!");
@@ -427,7 +428,7 @@ public class Manage implements IManagement{
         for(Person x: person){
             if(x instanceof Student){
                 if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
-                   x.setHoTen(name);
+                   x.setHoTen(chuanHoa(name));
                    flag = false;
                 }
             }
@@ -447,7 +448,7 @@ public class Manage implements IManagement{
         for(Person x: person){
             if(x instanceof Student){
                 if(((Student)x).getSBD().compareToIgnoreCase(sbd)==0){
-                   x.setQueQuan(name);
+                   x.setQueQuan(chuanHoa(name));
                    flag = false;
                 }
             }
@@ -630,7 +631,7 @@ public class Manage implements IManagement{
         for(Person x: person){
             if(x instanceof Supervisor){
                 if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGt)==0){
-                   x.setHoTen(name);
+                   x.setHoTen(chuanHoa(name));
                    flag = false;
                 }
             }
@@ -649,7 +650,7 @@ public class Manage implements IManagement{
         for(Person x: person){
             if(x instanceof Supervisor){
                 if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGt)==0){
-                   x.setQueQuan(name);
+                   x.setQueQuan(chuanHoa(name));
                    flag = false;
                 }
             }
@@ -728,7 +729,7 @@ public class Manage implements IManagement{
         for(Person x: person){
             if(x instanceof Supervisor){
                 if(((Supervisor)x).getMaGt().compareToIgnoreCase(maGt)==0){
-                   ((Supervisor) x).setDonViCT(donViCt);
+                   ((Supervisor) x).setDonViCT(chuanHoa(donViCt));
                    flag = false;
                 }
             }
@@ -736,7 +737,7 @@ public class Manage implements IManagement{
         if(flag){
             System.out.println("Khong tim thay Sbd, vui long kiem tra lai!");
         } else{
-            System.out.println("Sua ma giam thi thanh cong!");
+            System.out.println("Sua don vi cong tac thanh cong!");
         }
     }
     
@@ -844,7 +845,8 @@ public class Manage implements IManagement{
                     bw.write(index +". Student," + "Ho ten: " + s.getHoTen() + ",Que quan: " + s.getQueQuan() + ",Nam sinh: " +
                             s.getNamSinh() + ",Gioi Tinh: " + s.getGioiTinh() + ",Sbd: " + s.getSBD() + ", Diem uu tien: " + s.getDiemUuTien());
                     for (Wish w : s.getNguyenVong()) {
-                        bw.write(",Ma nguyen vong: " + w.getMaNv() + ",Ma truong: " + w.getMaTruong() + ",Ma nganh: " + w.getMaNganh() + ",Ten nganh: " + w.getTenNganh() + ",Khoi xet tuyen: " + w.getKhoiXt() + ",Diem thi: " + w.getDiemThi());
+                        bw.write(",Ma nguyen vong: " + w.getMaNv() + ",Ma truong: " + w.getMaTruong() + ",Ma nganh: " + w.getMaNganh() 
+                                + ",Ten nganh: " + w.getTenNganh() + ",Khoi xet tuyen: " + w.getKhoiXt() + ",Diem thi: " + w.getDiemThi());
                     }
                     index++;
                     bw.newLine();
@@ -950,7 +952,7 @@ public class Manage implements IManagement{
     public void hienGiamThiCongTac(String donViCt){
         int index =1;
         for(Person x : person){
-            if(x instanceof Supervisor && ((Supervisor)x).getDonViCT().equalsIgnoreCase(donViCt)== true){
+            if(x instanceof Supervisor && ((Supervisor)x).getDonViCT().compareToIgnoreCase(donViCt)== 0){
                 System.out.print(index++ + ". ");
                 x.hien();
             }

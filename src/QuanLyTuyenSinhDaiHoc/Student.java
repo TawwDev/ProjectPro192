@@ -60,6 +60,7 @@ public class Student extends Person{
         SBD = sc.nextLine();
         System.out.print("Diem uu tien: ");
         diemUuTien = sc.nextFloat();
+        sc.nextLine();
         setDiemUuTien(diemUuTien);
         nhapDsNguyenVong();
     }
